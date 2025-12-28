@@ -79,6 +79,8 @@ java-selenium-bdd-framework/
 ### 🔍 Requirements Traceability Matrix (RTM)
 This matrix ensures 100% test coverage by mapping business requirements to automated features and defect tracking.
 
+### 🔍 Requirements Traceability Matrix (RTM)
+
 | Requirement | Feature File | Test Case ID | Defect Link |
 | :--- | :--- | :--- | :--- |
 | User Authentication | login.feature | TC-UI-01 | [BUG-001](#-4-bug-report-examples) |
@@ -131,10 +133,10 @@ We prioritize API and Integration tests over UI tests to ensure a fast, stable, 
 ## 📄 3. TEST CASE EXAMPLES
 
 ### ✅ Example 1: UI Test (Login Page)
-```Feature: User Login
-  As a registered user
-  I want to log into the application
-  So that I can access my secure dashboard
+```gherkin
+Feature: User Login
+  Scenario: Successful login
+    Given I navigate to Login page...
 
   @smoke @regression
   Scenario: Successful login with valid credentials
