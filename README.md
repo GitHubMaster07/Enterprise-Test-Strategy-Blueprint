@@ -104,6 +104,22 @@ This matrix ensures 100% test coverage by mapping business requirements to autom
 - Capture screenshots automatically on failures  
 - Allure report auto-generated after each run  
 
+✅ **Definition of Done (DoD)**
+
+To wrap up your Test Strategy section like a Senior Lead, add this checklist. It proves you understand the "Exit Criteria" for a project to be considered "Quality Assured."
+
+Definition of Done for Automation:
+
+[ ] 100% Traceability: Every requirement maps to a Gherkin scenario.
+
+[ ] Execution Stability: Tests pass consistently in the CI/CD pipeline (Zero Flakiness).
+
+[ ] Peer Review: Page Objects and Test Logic have undergone code review.
+
+[ ] Reporting: Allure reports are generated with screenshots/logs for all failures.
+
+[ ] Data Cleanup: Teardown scripts have cleared all generated test data from DB/API.
+
 ---
 
 ## 📄 3. TEST CASE EXAMPLES
