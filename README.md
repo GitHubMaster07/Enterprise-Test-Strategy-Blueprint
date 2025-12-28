@@ -119,7 +119,6 @@ This matrix ensures 100% test coverage by mapping business requirements to autom
 | 3 | Click Login button | Redirects to secure area |
 | 4 | Verify message | Displays “You logged into a secure area!” |
 
----
 
 ### 🧪 Example 2: API Test (Booking Creation)
 ```java
@@ -136,32 +135,31 @@ public void createBooking() {
         .body("booking.firstname", equalTo("Jim"))
         .body("booking.lastname", equalTo("Brown"));
 }
+```
 
-
-
-🧩 Example 3: Database Validation
-Connection conn = DriverManager.getConnection(dbUrl, username, password);
-PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
-stmt.setInt(1, 1001);
-ResultSet rs = stmt.executeQuery();
-Assert.assertTrue(rs.next(), "Record not found in DB");
-
-🐞 4. BUG REPORT EXAMPLES
+### 🧩 Example 3: Database Validation
+- Connection conn = DriverManager.getConnection(dbUrl, username, password);
+- PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
+- stmt.setInt(1, 1001);
+- ResultSet rs = stmt.executeQuery();
+- Assert.assertTrue(rs.next(), "Record not found in DB");
+---
+### 🐞 4. BUG REPORT EXAMPLES
 | ID      | Summary                            | Steps to Reproduce                    | Expected Result         | Actual Result             | Severity | Status      |
 | ------- | ---------------------------------- | ------------------------------------- | ----------------------- | ------------------------- | -------- | ----------- |
 | BUG-001 | Login fails with valid credentials | Enter correct user/pass → click login | Redirect to secure area | Stuck on login page       | High     | Open        |
 | BUG-002 | API returns 500 on invalid token   | Call POST /booking with expired token | 401 Unauthorized        | 500 Internal Server Error | Medium   | In Progress |
 | BUG-003 | DB data not synced                 | Create booking via UI                 | DB should have entry    | Record missing            | High     | Open        |
-
-🧰 5. TEST SUITE STRUCTURE
+---
+### 🧰 5. TEST SUITE STRUCTURE
 | Suite           | Scope                                  | Type          |
 | --------------- | -------------------------------------- | ------------- |
 | SmokeSuite      | Sanity check for critical endpoints/UI | UI + API      |
 | RegressionSuite | Full feature coverage                  | UI + API + DB |
 | ApiSuite        | Independent API test runs              | API           |
 | DbSuite         | Data-level validation                  | DB            |
-
-📊 6. TEST REPORTING
+---
+### 📊 6. TEST REPORTING
 📘 Allure Report Example
 Run after tests: allure serve target/allure-results
 
@@ -173,12 +171,12 @@ Generates an interactive dashboard with:
 
 📘 Cucumber HTML Report
 Automatically generated in: target/cucumber-reports/
-
-🧱 7. CI/CD PIPELINE EXAMPLE (GitHub Actions)
+---
+### 🧱 7. CI/CD PIPELINE EXAMPLE (GitHub Actions)
 name: Java Maven Test Execution
 on: [push, pull_request]
 
-jobs:
+```jobs:
   test:
     runs-on: ubuntu-latest
     steps:
@@ -194,30 +192,40 @@ jobs:
         run: |
           npm install -g allure-commandline
           allure generate target/allure-results --clean -o target/allure-report
-
-🧩 8. TEST DATA MANAGEMENT
+```
+---
+### 🧩 8. TEST DATA MANAGEMENT
 - Store test data under /src/test/resources/testdata/
 - Use Faker library to generate random input dynamically
 - Maintain environment.properties for URLs and credentials
-
-🧩 9. RISKS & MITIGATION
+---
+### 🧩 9. RISKS & MITIGATION
 | Risk                    | Mitigation                         |
 | ----------------------- | ---------------------------------- |
 | Flaky tests             | Add waits, retry logic             |
 | Locator changes         | Centralize in POM                  |
 | Environment downtime    | Use mock servers or virtualization |
 | Test data inconsistency | Add teardown scripts               |
-
-🧠 10. BEST PRACTICES
+---
+### 🧠 10. BEST PRACTICES
 ✅ Maintain atomic, independent test cases
-✅ Keep feature files human-readable
-✅ Use assertions smartly — 1 major validation per test
-✅ Avoid hard-coded values (use properties/config)
-✅ Log everything (SLF4J / Log4j)
-✅ Keep reports versioned in CI/CD artifacts
 
+✅ Keep feature files human-readable
+
+✅ Use assertions smartly — 1 major validation per test
+
+✅ Avoid hard-coded values (use properties/config)
+
+✅ Log everything (SLF4J / Log4j)
+
+✅ Keep reports versioned in CI/CD artifacts
+---
 👨‍💻 Author
-Sergei Volodin
+
+**Sergei Volodin**
+
 🏙️ Chicago, IL
+
 💼 Senior SDET / QA Automation Engineer
+
 🧪 Passionate about test automation, CI/CD, and quality engineering excellence.
