@@ -81,8 +81,8 @@ This matrix ensures 100% test coverage by mapping business requirements to autom
 
 | Requirement | Feature File | Test Case ID | Defect Link |
 | :--- | :--- | :--- | :--- |
-| User Authentication | login.feature | TC-UI-01 | [BUG-001](#) |
-| Booking API | create_booking.feature | TC-API-05 | [BUG-002](#) |
+| User Authentication | login.feature | TC-UI-01 | [BUG-001](`JIRA-001`) |
+| Booking API | create_booking.feature | TC-API-05 | [BUG-002](`JIRA-005`) |
 
 ### 🔧 Tools & Tech Stack
 | Layer | Tool | Purpose |
@@ -120,6 +120,12 @@ Definition of Done for Automation:
 
 [ ] Data Cleanup: Teardown scripts have cleared all generated test data from DB/API.
 
+
+### 📐 Test Pyramid Logic
+We prioritize API and Integration tests over UI tests to ensure a fast, stable, and cost-effective feedback loop.
+- **UI (10%)**: Critical user journeys only (High maintenance).
+- **API/DB (30%)**: Business logic and data integrity (Fast/Stable).
+- **Unit (60%)**: Individual method validation (Instant).
 ---
 
 ## 📄 3. TEST CASE EXAMPLES
@@ -223,7 +229,16 @@ on: [push, pull_request]
 | Environment downtime    | Use mock servers or virtualization |
 | Test data inconsistency | Add teardown scripts               |
 ---
-### 🧠 10. BEST PRACTICES
+
+### 🧩 10. ENVIRONMENT STRATEGY
+| Environment | Purpose | Trigger |
+| :--- | :--- | :--- |
+| **Local** | Script development & debugging | Manual execution |
+| **Dev/QA** | Integration & functional testing | Automatic on Pull Request |
+| **Staging** | Regression & UAT (Pre-release) | Scheduled nightly runs |
+| **Production** | Smoke testing / Sanity check | Post-deployment verification |
+
+### 🧠 11. BEST PRACTICES
 ✅ Maintain atomic, independent test cases
 
 ✅ Keep feature files human-readable
