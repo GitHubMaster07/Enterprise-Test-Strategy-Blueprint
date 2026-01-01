@@ -110,7 +110,7 @@ This matrix ensures 100% test coverage by mapping business requirements to autom
 To wrap up your Test Strategy section like a Senior Lead, add this checklist. It proves you understand the "Exit Criteria" for a project to be considered "Quality Assured."
 
 Definition of Done for Automation:
-
+```
 [ ] 100% Traceability: Every requirement maps to a Gherkin scenario.
 
 [ ] Execution Stability: Tests pass consistently in the CI/CD pipeline (Zero Flakiness).
@@ -120,7 +120,9 @@ Definition of Done for Automation:
 [ ] Reporting: Allure reports are generated with screenshots/logs for all failures.
 
 [ ] Data Cleanup: Teardown scripts have cleared all generated test data from DB/API.
+```
 
+---
 
 ### 📐 Test Pyramid Logic
 We prioritize API and Integration tests over UI tests to ensure a fast, stable, and cost-effective feedback loop.
