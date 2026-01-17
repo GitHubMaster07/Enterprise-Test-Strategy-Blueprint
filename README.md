@@ -1,142 +1,191 @@
-# Enterprise Test Strategy Blueprint
+# 🚀 Enterprise Test Strategy Blueprint  
+Java • Selenium • RestAssured • Cucumber • TestNG • Maven • Allure • JDBC • WireMock • Pact • Kafka
 
-## Executive Summary
+## 📘 Executive Summary
+This repository provides a complete, enterprise‑grade Test Strategy Blueprint designed for modern distributed systems.  
+It defines a unified Quality Engineering approach covering UI, API, DB, events, integrations, CI/CD, governance, and non‑functional testing.
 
-This repository contains an **enterprise‑grade Quality Engineering blueprint** for validating modern distributed systems. The solution defines how quality is engineered, governed, and validated across UI, API, database, event‑driven, and integration layers using a Java‑based automation stack.
+The blueprint is built for organizations using Java‑based automation with:
+- Selenium WebDriver  
+- RestAssured  
+- Cucumber (BDD)  
+- TestNG  
+- Maven  
+- JDBC  
+- WireMock  
+- Pact  
+- Kafka/SQS  
 
-The goal is not only to automate tests, but to establish a **scalable, auditable, and CI/CD‑ready quality system** that supports fast delivery, regulatory compliance, and high confidence releases.
-
----
-
-## Quality Vision & Principles
-
-Our Quality Engineering approach is built on the following principles:
-
-* **Shift‑Left Testing** — defects are prevented early through unit, contract, and API validation
-* **Layered Test Coverage** — each test layer validates what it is best suited for
-* **Automation‑First Mindset** — all repeatable scenarios are automated
-* **Deterministic & Stable Tests** — zero tolerance for flaky or non‑deterministic tests
-* **Enterprise Governance** — full traceability, auditability, and compliance readiness
-
----
-
-## System Under Test (High‑Level)
-
-The automation framework validates a modern distributed system consisting of:
-
-* Web UI applications
-* RESTful APIs
-* Relational databases
-* Event‑driven messaging (Kafka / SQS / RabbitMQ)
-* External service integrations
-
-Tests are executed across local, QA, staging, and CI/CD ephemeral environments.
+It serves as the **single source of truth** for how quality is engineered, validated, and governed across the entire system.
 
 ---
 
-## Test Pyramid & Coverage Map
+## 🎯 Quality Vision
+The Quality Engineering vision is based on five core principles:
 
-The strategy follows a layered testing model:
-
-* **Unit Tests** — fast validation of business logic
-* **API Tests** — backend workflows and rules
-* **UI Tests** — critical user journeys
-* **Integration Tests** — cross‑service interactions
-* **End‑to‑End Tests** — business‑critical flows only
-
-Lower layers provide fast feedback and stability, while higher layers provide release confidence.
+1. **Shift‑Left Testing** — validate early using contracts, schemas, mocks, and virtualization.  
+2. **Layered Test Coverage** — each layer validates what it is best suited for.  
+3. **Automation‑First Mindset** — every repeatable scenario is automated.  
+4. **Scalability & Maintainability** — modular architecture, parallel execution, clean abstractions.  
+5. **Enterprise‑Grade Governance** — traceability, auditability, compliance, and secure data handling.
 
 ---
 
-## Technology Stack (Overview)
+## 🧠 System Under Test (High-Level)
+The automation framework validates:
 
-**Languages & Runtime**
+- Web UI (Selenium)  
+- REST APIs (RestAssured)  
+- Relational databases (JDBC)  
+- Event-driven flows (Kafka/SQS)  
+- External service integrations (WireMock)  
+- API contracts (Pact)
 
-* Java 17
-* Gherkin (BDD)
-* SQL
+Supported environments:
 
-**Automation & Testing**
-
-* Selenium WebDriver
-* RestAssured
-* Cucumber (BDD)
-* TestNG
-
-**Supporting Tools**
-
-* Maven
-* JDBC
-* WireMock
-* Pact
-* Kafka
-
-**Reporting & Quality**
-
-* Allure
-* Cucumber HTML Reports
-* SonarQube
+- Local  
+- QA/Staging  
+- CI/CD ephemeral environments  
+- Distributed execution (Grid/Selenoid)
 
 ---
 
-## Framework Architecture (Summary)
+## 🏗️ Test Pyramid & Coverage Map
+- **Unit Tests** → logic  
+- **API Tests** → business rules  
+- **UI Tests** → user experience  
+- **Integration Tests** → cross‑service workflows  
+- **E2E Tests** → real user journeys  
+- **Non‑Functional Tests** → performance, security, reliability  
 
-The framework follows a modular, enterprise‑ready architecture:
-
-* Clear separation of concerns (UI, API, DB, events)
-* Page Object Model for UI automation
-* Reusable API client abstractions
-* Thread‑safe execution using ThreadLocal
-* Environment‑agnostic configuration
-* CI/CD‑friendly execution model
-
-Detailed architecture documentation is available in the `/docs` directory.
+The blueprint enforces **minimal UI**, **maximal API**, and **contract‑first** validation.
 
 ---
 
-## CI/CD Integration
+## 🧰 Technology Stack (Overview)
+**Languages & Runtimes**  
+- Java 17  
+- Gherkin  
+- SQL  
 
-The automation suite is designed for seamless CI/CD execution:
+**UI Automation**  
+- Selenium WebDriver  
+- WebDriverManager  
 
-* Pull Request validation
-* Parallel execution
-* Environment‑specific profiles
-* Quality gates for test results
-* Artifact generation (reports, logs, evidence)
+**API Automation**  
+- RestAssured  
+- JSON Schema Validator  
 
-Pipelines can be executed via GitHub Actions or Jenkins.
+**BDD**  
+- Cucumber JVM  
+- TestNG runners  
+
+**Database**  
+- JDBC  
+
+**Service Virtualization**  
+- WireMock  
+
+**Contract Testing**  
+- Pact  
+
+**Event Testing**  
+- Kafka / SQS  
+
+**Reporting**  
+- Allure Report  
+- Cucumber HTML  
+
+**CI/CD**  
+- GitHub Actions  
+- Jenkins  
 
 ---
 
-## How to Run Tests
+## 🏗️ Framework Architecture (Summary)
+The framework follows a modular, scalable architecture:
 
-```bash
-# Run all tests
-mvn clean test
+- Page Object Model (UI)  
+- API client layer  
+- DB validation layer  
+- Event testing layer  
+- Contract testing layer  
+- Config & environment management  
+- Parallel execution model  
+- Reusable utilities & abstractions  
+- Thread‑safe drivers, clients, and DB connections  
 
-# Run smoke suite
-mvn test -Dcucumber.filter.tags="@smoke"
+Full details are available in:  
+📄 `docs/Framework-Architecture.md`
 
-# Run regression suite
-mvn test -Dcucumber.filter.tags="@regression"
+---
+
+## 🔄 CI/CD Integration (High-Level)
+The automation framework integrates with CI/CD pipelines to support:
+
+- PR‑based execution  
+- Parallel matrix builds  
+- Smoke, regression, and nightly suites  
+- Artifact storage (Allure, logs, screenshots)  
+- Quality gates and thresholds  
+- Automatic reruns and flakiness detection  
+
+Full CI/CD documentation:  
+📄 `docs/CI-CD.md`
+
+---
+
+## ▶️ How to Run Tests
+
+### **Local Execution**
+```
+mvn clean test -Plocal
+```
+### **Environment-Specific Execution**
+```
+mvn clean test -Pstaging
+```
+### **Run Specific Suite**
+```
+mvn clean test -Dsuite=regression
 ```
 
-Environment configuration is managed via Maven profiles and configuration properties.
+---
+
+## 📚 Documentation Index
+All detailed documentation is located in the `docs/` directory:
+
+- **Test Strategy** → `docs/Test-Strategy.md`  
+- **Framework Architecture** → `docs/Framework-Architecture.md`  
+- **Test Layers** → `docs/Test-Layers.md`  
+- **Advanced Testing (NFR)** → `docs/Advanced-Testing.md`  
+- **CI/CD** → `docs/CI-CD.md`  
+- **Examples** → `docs/Examples/`  
 
 ---
 
-## Documentation Index
+## 🏁 Purpose of This Repository
+This blueprint provides:
 
-Full enterprise documentation is available in the `/docs` directory:
+- A unified automation architecture  
+- A complete testing strategy across all layers  
+- Enterprise‑level governance and compliance  
+- A CI/CD‑ready execution model  
+- A scalable foundation for multi‑team collaboration  
 
-* **Test Strategy & Governance** — `docs/Test-Strategy.md`
-* **Framework Architecture** — `docs/Framework-Architecture.md`
-* **Test Layers & Coverage** — `docs/Test-Layers.md`
-* **Advanced Testing Disciplines** — `docs/Advanced-Testing.md`
-* **CI/CD & Quality Gates** — `docs/CI-CD.md`
+It is intended for:
+
+- QA Automation Engineers / SDETs  
+- Test Architects  
+- Developers  
+- DevOps Engineers  
+- Compliance & Security teams  
 
 ---
 
-## Final Notes
+## 📄 License
+This project is licensed under the MIT License.  
+See the `LICENSE` file for details.
+Copyright (c) 2026 Sergei Volodin
 
-This repository represents a **single source of truth** for how quality is engineered, validated, and governed across the system. It is intended for SDETs, Test Architects, Developers, DevOps engineers, and technical leadership.
+
