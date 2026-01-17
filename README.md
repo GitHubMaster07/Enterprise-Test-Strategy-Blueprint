@@ -1,4 +1,25 @@
-# 🚀 Enterprise Test Strategy Blueprint  
+ <p align="center">
+  <img src="https://img.shields.io/badge/License-MIT-success" />
+  <img src="https://img.shields.io/badge/Java-17-blue" />
+  <img src="https://img.shields.io/badge/Selenium-WebDriver-green" />
+  <img src="https://img.shields.io/badge/RestAssured-API-orange" />
+  <img src="https://img.shields.io/badge/Cucumber-BDD-brightgreen" />
+  <img src="https://img.shields.io/badge/TestNG-Framework-yellow" />
+  <img src="https://img.shields.io/badge/Maven-Build-red" />
+  <img src="https://img.shields.io/badge/Allure-Reporting-purple" />
+  <img src="https://img.shields.io/badge/JDBC-Database-lightgrey" />
+  <img src="https://img.shields.io/badge/WireMock-Virtualization-blueviolet" />
+  <img src="https://img.shields.io/badge/Pact-Contract_Testing-ff69b4" />
+  <img src="https://img.shields.io/badge/Kafka-Event_Driven-black" />
+  <img src="https://img.shields.io/badge/CI%2FCD-GitHub_Actions%2FJenkins-blue" />
+</p>
+
+<h1 align="center">🚀 Enterprise Test Strategy Blueprint</h1>
+
+<p align="center">
+  A complete, enterprise‑grade Quality Engineering blueprint for UI, API, DB, events, integrations, and CI/CD.
+</p>
+
 Java • Selenium • RestAssured • Cucumber • TestNG • Maven • Allure • JDBC • WireMock • Pact • Kafka
 
 ## 📘 Executive Summary
