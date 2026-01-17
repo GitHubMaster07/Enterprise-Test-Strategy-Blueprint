@@ -26,6 +26,34 @@
   A complete, enterprise‑grade Quality Engineering blueprint for UI, API, DB, events, integrations, and CI/CD.
 </p>
 
+```
+                       +-----------------------------+
+                       |      CI/CD Pipeline         |
+                       |  GitHub Actions / Jenkins   |
+                       +--------------+--------------+
+                                      |
+ 
+                                      v
++-------------------+      +-------------------+      +-------------------+
+|       UI          | ---> |       API         | ---> |       DB          |
+|  Selenium / POM   |      |  RestAssured      |      |      JDBC         |
++-------------------+      +-------------------+      +-------------------+
+          |                          |                          |
+          v                          v                          v
++-------------------+      +-------------------+      +-------------------+
+|  External Services|      |   Event Streams   |      |   Contract Tests  |
+|     WireMock      |      | Kafka / SQS       |      |       Pact        |
++-------------------+      +-------------------+      +-------------------+
+                                     |
+                       +-------------v---------------+
+                       |  Automation Framework Layer |
+                       |  Java • TestNG • Cucumber   |
+                       |  Allure • Maven • Utils     |
+                       +-----------------------------+
+```
+
+
+
 ## 📘 Executive Summary
 This repository provides a complete, enterprise‑grade Test Strategy Blueprint designed for modern distributed systems.  
 It defines a unified Quality Engineering approach covering UI, API, DB, events, integrations, CI/CD, governance, and non‑functional testing.
