@@ -1,1489 +1,2800 @@
-# 🚀 Test-Strategy-Blueprint
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-17-blue" />
+  <img src="https://img.shields.io/badge/Selenium-WebDriver-green" />
+  <img src="https://img.shields.io/badge/RestAssured-API-orange" />
+  <img src="https://img.shields.io/badge/Cucumber-BDD-brightgreen" />
+  <img src="https://img.shields.io/badge/TestNG-Framework-yellow" />
+  <img src="https://img.shields.io/badge/Maven-Build-red" />
+  <img src="https://img.shields.io/badge/Allure-Reporting-purple" />
+  <img src="https://img.shields.io/badge/JDBC-Database-lightgrey" />
+  <img src="https://img.shields.io/badge/WireMock-Virtualization-blueviolet" />
+  <img src="https://img.shields.io/badge/Pact-Contract_Testing-ff69b4" />
+  <img src="https://img.shields.io/badge/Kafka-Event_Driven-black" />
+  <img src="https://img.shields.io/badge/CI%2FCD-GitHub_Actions%2FJenkins-blue" />
+  <img src="https://img.shields.io/badge/License-MIT-success" />
+</p>
 
-![Java](https://img.shields.io/badge/Language-Java_11-blue?logo=java)
-![Selenium](https://img.shields.io/badge/UI%20Testing-Selenium-green?logo=selenium)
-![RestAssured](https://img.shields.io/badge/API%20Testing-RestAssured-yellowgreen)
-![Cucumber](https://img.shields.io/badge/BDD-Cucumber-brightgreen?logo=cucumber)
-![Maven](https://img.shields.io/badge/Build-Maven-orange?logo=apachemaven)
-![Allure](https://img.shields.io/badge/Reports-Allure-blueviolet)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+# 🚀 Enterprise Test Strategy Blueprint  
+### *Java • Selenium • RestAssured • Cucumber • TestNG • Maven • Allure • JDBC • WireMock • Pact • Kafka*
+
+# 📘 Executive Summary
+
+This Enterprise Test Strategy Blueprint defines a complete, scalable, and future‑proof Quality Engineering approach for a modern distributed system.  
+It is designed for organizations using Java‑based automation with Selenium, RestAssured, Cucumber (BDD), TestNG, Maven, JDBC, and enterprise‑grade integrations such as Kafka, Pact, and WireMock.
+
+The strategy ensures:
+- High test coverage across UI, API, DB, events, and integrations  
+- Fast and stable CI/CD pipelines  
+- Full traceability from requirements to automated tests  
+- Compliance with enterprise standards (HIPAA, SOC2, PCI, GDPR)  
+- Scalable architecture supporting multi‑team collaboration  
+- Deterministic, reproducible, and audit‑ready test execution  
+
+This blueprint is intended for:
+- QA Automation Engineers / SDETs  
+- Test Leads & Test Architects  
+- Developers & DevOps Engineers  
+- Compliance, Audit, and Security teams  
+
+The document provides:
+- A unified automation architecture  
+- A complete testing strategy across all layers  
+- A modular, maintainable framework structure  
+- Enterprise‑level controls for security, compliance, and auditability  
+- A CI/CD‑ready execution model  
+- A roadmap for scaling automation across teams and services  
+
+This blueprint represents the **single source of truth** for how quality is engineered, validated, and governed across the entire system.
+
+# 🧠 Project Overview & Quality Vision
+
+This project delivers a unified, enterprise‑grade automation framework designed to validate a modern distributed system across UI, API, database, events, and external integrations.  
+The framework is built using Java, Selenium WebDriver, RestAssured, Cucumber (BDD), TestNG, Maven, JDBC, WireMock, Pact, and Kafka/SQS.
+
+Its purpose is to provide a scalable, maintainable, and audit‑ready automation solution that supports rapid delivery, high reliability, and full traceability across all quality activities.
 
 ---
 
-## 🧠 Project Overview
-This is a **Strategic Quality Blueprint** built using:
-- **Java + Selenium WebDriver** for UI testing  
-- **RestAssured** for API automation  
-- **Cucumber (BDD)** for feature-driven testing  
-- **JDBC + SQL** for backend validation  
-- **TestNG + Maven + Allure** for execution and reporting
+## 🎯 Quality Vision
 
-The framework enables **end-to-end testing (UI + API + DB)** and integrates seamlessly with **CI/CD pipelines (GitHub Actions/Jenkins)**.
+The Quality Engineering vision is based on five core principles:
+
+### **1. Shift‑Left Testing**
+Testing begins early:
+- API contract validation before UI is ready  
+- Schema validation before integration  
+- Mocking and virtualization for unstable dependencies  
+- Early detection of breaking changes  
+
+### **2. Layered Test Coverage**
+Each layer validates what it is best suited for:
+- Unit tests → logic  
+- API tests → business rules  
+- UI tests → user experience  
+- DB tests → data integrity  
+- Integration tests → cross‑service workflows  
+- E2E tests → real user journeys  
+
+### **3. Automation‑First Mindset**
+Every repeatable scenario is automated:
+- UI + API + DB + Events  
+- Contract testing  
+- Virtualized dependencies  
+- Compliance evidence collection  
+
+### **4. Scalability & Maintainability**
+The framework supports:
+- Multi‑team collaboration  
+- Modular architecture  
+- Parallel execution  
+- Distributed test runs  
+- Clean separation of concerns  
+
+### **5. Enterprise‑Grade Governance**
+The framework enforces:
+- Traceability (Requirements → Tests → Defects)  
+- Auditability (logs, artifacts, evidence)  
+- Compliance (HIPAA, SOC2, PCI, GDPR)  
+- Secure handling of secrets and data  
 
 ---
 
-# 📘 TEST DOCUMENTATION
+## 🧩 Business Value
+
+This automation strategy enables:
+- Faster release cycles  
+- Reduced manual regression effort  
+- Higher confidence in production deployments  
+- Early detection of defects  
+- Lower cost of quality  
+- Improved collaboration across QA, Dev, and DevOps  
 
 ---
 
-## 🧾 1. TEST PLAN
+## 🏗️ System Under Test (SUT)
 
-### 🎯 Objective
-To ensure functional, regression, and integration-level validation of web and API components for a sample application (The Internet - Heroku).
+The automation framework validates:
+- Web UI (Selenium)  
+- REST APIs (RestAssured)  
+- Relational databases (JDBC)  
+- Event-driven flows (Kafka/SQS)  
+- External service integrations (WireMock)  
+- API contracts (Pact)  
 
-### 🧩 Scope
-| In-Scope | Out-of-Scope |
-|-----------|---------------|
-| Web UI tests for login and secure pages | Non-UI services (SOAP, Kafka) |
-| REST API tests for CRUD operations | Performance or load testing |
-| Database validation | Mobile testing |
-
-### 🧪 Test Levels
-- **Smoke Tests** – Quick validation of core flows  
-- **Regression Tests** – Full suite covering all functional modules  
-- **API Tests** – Endpoint validation with RestAssured  
-- **Database Tests** – Data validation via JDBC  
-
-### 🕐 Schedule
-| Phase | Description | Owner |
-|--------|-------------|--------|
-| Test Planning | Define scope, tools, environment | QA Lead |
-| Test Design | Create BDD feature files & data | SDET |
-| Test Execution | Run tests in local/CI | SDET |
-| Reporting | Generate and analyze Allure reports | SDET |
+The system is tested across:
+- Local environments  
+- QA/Staging  
+- CI/CD ephemeral environments  
+- Distributed execution environments (Grid/Selenoid)  
 
 ---
 
-## 🧩 2. TEST STRATEGY
+## 🔐 Quality Risks Addressed
 
-### 🧱 Framework Architecture
+The strategy mitigates:
+- UI flakiness  
+- API drift and breaking changes  
+- Schema inconsistencies  
+- Data integrity issues  
+- Event processing failures  
+- External dependency instability  
+- Security and compliance gaps  
 
-```text
+---
+
+## 🚀 Quality Goals
+
+- 0 critical defects in production  
+- 95%+ automation coverage for regression  
+- 100% traceability for all requirements  
+- <10 minutes smoke execution time  
+- <30 minutes full regression in CI  
+- Zero flaky tests (strict governance)  
+- Full audit readiness for regulated industries
+
+---  
+
+# 🔧 Tools & Tech Stack
+
+This automation framework is built on a modern, enterprise‑ready technology stack that supports UI, API, DB, event‑driven, and contract testing.  
+Each tool is selected for scalability, maintainability, and seamless CI/CD integration.
+
+---
+
+## 🧱 Core Languages & Runtimes
+- **Java 17** — primary automation language  
+- **Gherkin** — human‑readable BDD syntax  
+- **SQL** — backend validation and data integrity checks  
+
+---
+
+## 🌐 UI Automation
+- **Selenium WebDriver**  
+  - Cross‑browser automation  
+  - Supports Grid/Selenoid for distributed execution  
+  - Full control over DOM interactions  
+
+- **WebDriverManager**  
+  - Automatic driver provisioning  
+  - Eliminates manual driver management  
+
+---
+
+## 🔌 API Automation
+- **RestAssured**  
+  - Fluent API for HTTP requests  
+  - JSON/XML parsing  
+  - Schema validation  
+  - Request/response logging  
+
+- **JSON Schema Validator**  
+  - Ensures API responses match expected structure  
+  - Prevents silent API drift  
+
+---
+
+## 🧩 BDD Framework
+- **Cucumber JVM**  
+  - Gherkin feature files  
+  - Step Definitions in Java  
+  - Hooks for setup/teardown  
+  - Seamless integration with TestNG  
+
+---
+
+## 🧪 Test Runner & Execution Engine
+- **TestNG**  
+  - Parallel execution  
+  - RetryAnalyzer for flaky tests  
+  - Suite-level configuration  
+  - Data providers for parameterized tests  
+
+---
+
+## 📦 Build & Dependency Management
+- **Maven**  
+  - Dependency resolution  
+  - Plugin ecosystem  
+  - Profiles for environment-specific execution  
+  - Surefire/Failsafe integration  
+
+---
+
+## 🗄️ Database Validation
+- **JDBC**  
+  - Direct SQL execution  
+  - ResultSet validation  
+  - Transaction-level testing  
+  - Schema drift detection  
+
+---
+
+## 🧬 Contract Testing
+- **Pact (Consumer-Driven Contracts)**  
+  - Validates API compatibility between services  
+  - Detects breaking changes early  
+  - Publishes contracts to Pact Broker  
+
+---
+
+## 🧪 Service Virtualization
+- **WireMock**  
+  - Mocks unstable or unavailable services  
+  - Simulates delays, errors, and edge cases  
+  - Enables isolated integration testing  
+
+---
+
+## 📡 Event-Driven Testing
+- **Kafka / AWS SQS / RabbitMQ**  
+  - Producer/consumer validation  
+  - Schema registry enforcement  
+  - End-to-end event flow testing  
+  - DLQ (Dead Letter Queue) validation  
+
+---
+
+## 📊 Reporting & Observability
+- **Allure Report**  
+  - Rich visual reporting  
+  - Screenshots, logs, attachments  
+  - Flaky test detection  
+  - Historical trends  
+
+- **Cucumber HTML Report**  
+  - Lightweight, portable HTML summary  
+  - Step-by-step scenario breakdown  
+
+---
+
+## 🔐 Secrets & Configuration
+- **GitHub Secrets / Jenkins Credentials**  
+  - Secure CI/CD variable storage  
+
+- **Environment Variables (.env)**  
+  - Local development secrets  
+  - Excluded via .gitignore  
+
+- **Config Properties**  
+  - Environment URLs  
+  - Browser settings  
+  - Timeouts  
+  - API tokens (injected at runtime)  
+
+---
+
+## 🚀 CI/CD Integration
+- **GitHub Actions**  
+  - PR-based execution  
+  - Parallel matrix builds  
+  - Artifact storage  
+
+- **Jenkins**  
+  - Enterprise pipelines  
+  - Multi-branch support  
+  - Scheduled nightly runs  
+
+---
+
+## 🧹 Code Quality & Governance
+- **Checkstyle / SpotBugs**  
+  - Enforces coding standards  
+  - Prevents common Java issues  
+
+- **SonarQube**  
+  - Code smells  
+  - Security vulnerabilities  
+  - Coverage metrics  
+
+---
+
+## 🧰 Additional Utilities
+- **Lombok** — reduces boilerplate  
+- **Apache Commons** — utility helpers  
+- **Jackson / Gson** — JSON serialization  
+- **SLF4J + Logback** — structured logging
+
+--- 
+
+# 🏗️ Framework Architecture (Enterprise‑Grade)
+
+The automation framework follows a modular, scalable, and enterprise‑ready architecture designed to support UI, API, DB, event-driven, and contract testing.  
+It enforces clean separation of concerns, high maintainability, and full compatibility with CI/CD pipelines.
+
+---
+
+## 📁 Project Structure (Improved & Scalable)
+
+```
 java-selenium-bdd-framework/
 ├── src/
 │   ├── main/java/
-│   │   └── core/              # DriverFactory (ThreadLocal), ConfigReader, Utils
+│   │   └── core/
+│   │       ├── driver/              # DriverFactory, WebDriverManager, ThreadLocal driver
+│   │       ├── config/              # ConfigReader, Environment loader
+│   │       ├── utils/               # Common utilities (waits, logging, random data)
+│   │       └── api/                 # API client base classes
 │   ├── test/java/
-│   │   ├── pages/             # Page Object Model (POM) classes
-│   │   ├── api/               # RestAssured controllers, Endpoints & Payloads
-│   │   ├── stepdefs/          # Cucumber Step Definitions
-│   │   ├── db/                # JDBC Database connectors & queries
-│   │   └── runners/           # TestNG Runner files (Parallel execution config)
+│   │   ├── pages/                   # Page Object Model (POM) classes
+│   │   ├── api/                     # RestAssured clients, endpoints, payload builders
+│   │   ├── db/                      # JDBC connectors, queries, DB validators
+│   │   ├── stepdefs/                # Cucumber Step Definitions
+│   │   ├── hooks/                   # Before/After hooks (screenshots, cleanup)
+│   │   └── runners/                 # TestNG runners (parallel, smoke, regression)
 │   └── test/resources/
-│       ├── features/          # BDD Gherkin files (.feature)
-│       ├── testdata/          # Environment-specific JSON/Properties files
-│       └── config.properties  # Global variables (URL, Browser, Timeouts)
-├── pom.xml                    # Maven dependencies (Selenium, RestAssured, Cucumber)
-├── .gitattributes             # Ensures 100% Java language detection
-└── .gitignore                 # Excludes /target, /allure-results, and .idea/
-```
-## 🧩 Framework Scalability & Modularization Strategy
-
-To support long-term growth and multi-team collaboration, the framework is designed with strict modular boundaries and scalability principles.
-
-### 🧱 Modular Architecture
-The codebase is divided into independent modules:
-
-- **ui-core** → WebDriver, POM, waits, browser utilities  
-- **api-core** → RestAssured clients, request builders, schema validators  
-- **db-core** → JDBC utilities, query builders, DB assertions  
-- **test-core** → Shared utilities, config loaders, logging  
-- **feature-modules** → Business-domain test suites (auth, booking, payments, etc.)
-
-Each module can evolve independently without breaking others.
-
-### 🧬 Horizontal Scalability
-The framework supports:
-
-- Multi-threaded execution across dozens of nodes  
-- Distributed test execution via Selenium Grid / Selenoid  
-- Parallel API and DB tests without shared-state collisions  
-- Sharding of test suites for faster CI pipelines  
-
-### 🧹 Anti-Bloat Controls
-To prevent framework decay:
-
-- Deprecated utilities are flagged and removed every release cycle  
-- Page Objects follow strict SRP (Single Responsibility Principle)  
-- No business logic allowed in step definitions  
-- All new utilities require reviewer approval  
-
-### 🧪 Test Suite Growth Strategy
-As the number of tests increases:
-
-- Suites are split by domain (auth, booking, admin, payments)  
-- Heavy UI tests are minimized and replaced with API/integration tests  
-- Slow tests are isolated into nightly runs  
-- Critical-path tests run on every PR  
-
-### 📈 Scaling CI/CD
-- Test suites run in parallel across multiple runners  
-- API tests run first to catch backend issues early  
-- UI tests run only after API layer passes  
-- Historical trends identify slow or unstable tests  
-
-### 🎯 Benefits
-- Supports large engineering teams without collisions  
-- Enables rapid scaling of test coverage  
-- Reduces maintenance overhead  
-- Keeps the framework clean, modular, and future-proof  
-
-
-### 🔍 Requirements Traceability Matrix (RTM)
-This matrix ensures 100% test coverage by mapping business requirements to automated features and defect tracking.
-
-| Requirement | Feature File | Test Case ID | Defect Link |
-| :--- | :--- | :--- | :--- |
-| User Authentication | login.feature | TC-UI-01 | [BUG-001](#-4-bug-report-examples) |
-| Booking API | create_booking.feature | TC-API-05 | [BUG-002](#-4-bug-report-examples) |
-
-## 🛡️ Compliance, Auditability & Traceability Controls
-
-For organizations operating in regulated industries (HIPAA, SOC2, PCI, GDPR), the automation framework includes built‑in controls to ensure compliance, auditability, and end‑to‑end traceability.
-
-### 📜 Regulatory Alignment
-The framework supports compliance requirements through:
-
-- **HIPAA** → Masking PHI in logs, encrypted test data, secure API calls  
-- **SOC2** → Access control, audit logs, CI/CD integrity checks  
-- **PCI DSS** → No storage of sensitive cardholder data in tests or logs  
-- **GDPR** → Data minimization, anonymization, and right‑to‑erasure support  
-
-### 🧾 Audit Logging
-Every test execution generates an immutable audit trail containing:
-
-- Test name, ID, and requirement mapping  
-- Environment and build version  
-- Execution timestamp  
-- Correlation ID  
-- API requests/responses (sanitized)  
-- DB queries executed  
-- Screenshots and artifacts  
-
-Audit logs are stored in CI artifacts for **90 days** (configurable).
-
-### 🔗 End‑to‑End Traceability
-Traceability is enforced across:
-
-- **Requirements → Feature Files → Test Cases → Defects**  
-- **API Contracts → Schema Validators → Test Assertions**  
-- **DB Schema → Query Validators → Data Assertions**
-
-This ensures 100% visibility for auditors and stakeholders.
-
-### 🔐 Secure Data Handling
-- Sensitive data is encrypted at rest and in transit  
-- Test data files never contain real PII  
-- `.env` and secrets are excluded from Git  
-- API tokens are rotated automatically  
-
-### 🧪 Evidence Collection for Audits
-The framework automatically captures:
-
-- Allure reports  
-- HTML reports  
-- Logs  
-- Screenshots  
-- API traces  
-- DB validation results  
-
-These artifacts are attached to CI/CD runs and can be exported for compliance audits.
-
-### 🎯 Benefits
-- Supports regulated industries (healthcare, finance, government)  
-- Ensures full transparency and audit readiness  
-- Reduces compliance risk and manual evidence gathering  
-- Strengthens trust with security and compliance teams  
-
-
-### 🔧 Tools & Tech Stack
-| Layer | Tool | Purpose |
-|--------|------|----------|
-| UI | Selenium | Functional web testing |
-| API | RestAssured | REST endpoint testing |
-| BDD | Cucumber | Human-readable scenarios |
-| Build | Maven | Dependency & test management |
-| Reports | Allure / HTML | Visual execution results |
-| CI/CD | Jenkins / GitHub Actions | Continuous execution |
-| DB | JDBC | SQL-based validation |
-
-### 🔐 Secrets & Credentials Management (Enterprise Requirement)
-
-To ensure secure handling of sensitive data (tokens, passwords, API keys), the framework integrates with enterprise‑grade secrets management:
-
-| Layer   | Tool                                    | Purpose                                      |
-|---------|-----------------------------------------|----------------------------------------------|
-| Secrets | GitHub Secrets / Jenkins Credentials    | Secure CI/CD variable storage                |
-| Vault   | HashiCorp Vault / AWS Secrets Manager   | Runtime retrieval of encrypted secrets       |
-| Config  | Environment variables                   | Prevents hard‑coded credentials in the repo  |
-
-**Principles followed:**
-- No secrets stored in Git, feature files, or config.properties  
-- CI/CD injects secrets at runtime  
-- Local development uses `.env` files excluded via `.gitignore`  
-- API tokens refreshed automatically before test execution  
-
-
-### 🧠 Strategy Summary
-- Use **Page Object Model (POM)** for UI  
-- Use **Cucumber BDD** for readability & traceability  
-- Maintain environment configs in `config.properties`  
-- Parallel test execution supported with **ThreadLocal DriverFactory**  
-- Store reusable methods in `utilities/`  
-- Capture screenshots automatically on failures  
-- Allure report auto-generated after each run
-
-### ⚡ Advanced Parallel Execution & Retry Strategy
-
-Large-scale automation requires stable, predictable, and highly parallel execution.  
-The framework includes a robust strategy for concurrency, isolation, and flakiness reduction.
-
-### 🧵 Thread-Safe Architecture
-- WebDriver instances are isolated using `ThreadLocal` to prevent cross-thread interference.
-- API clients and DB connections are instantiated per thread to avoid shared state.
-- Test data generators use UUID-based identifiers to ensure uniqueness in parallel runs.
-
-### 🔁 Intelligent Retry Logic
-Implemented via TestNG RetryAnalyzer:
-
-- Retries only on known flaky categories (timeouts, stale elements, 5xx API responses).
-- Retries are capped (1–2 attempts) to avoid masking real defects.
-- All retries are logged and surfaced in Allure as “Flaky” for visibility.
-
-### 🚦 Parallel Execution Modes
-- **Method-level parallelism** for fast API/UI execution.
-- **Suite-level parallelism** for multi-environment or multi-browser runs.
-- **Data-driven parallelism** for large input matrices.
-
-### 🧪 Flakiness Detection & Reporting
-- Allure categories highlight flaky tests separately.
-- Historical trends track instability across builds.
-- Automatic tagging of tests that fail intermittently.
-
-### 🎯 Benefits
-- Faster CI/CD pipelines without sacrificing stability.
-- Reduced false negatives caused by environmental noise.
-- Full isolation of test artifacts across threads.
-
-
-✅ **Definition of Done (DoD)**
-
-To wrap up your Test Strategy section like a Senior Lead, add this checklist. It proves you understand the "Exit Criteria" for a project to be considered "Quality Assured."
-
-Definition of Done for Automation:
-```
-[ ] 100% Traceability: Every requirement maps to a Gherkin scenario.
-
-[ ] Execution Stability: Tests pass consistently in the CI/CD pipeline (Zero Flakiness).
-
-[ ] Peer Review: Page Objects and Test Logic have undergone code review.
-
-[ ] Reporting: Allure reports are generated with screenshots/logs for all failures.
-
-[ ] Data Cleanup: Teardown scripts have cleared all generated test data from DB/API.
+│       ├── features/                # Gherkin feature files
+│       ├── schemas/                 # JSON schemas for API validation
+│       ├── testdata/                # Environment-specific test data
+│       └── config.properties        # Global configuration
+├── pom.xml                          # Maven dependencies & plugins
+├── .gitignore                       # Excludes target/, logs/, allure-results/
+└── .gitattributes                   # Ensures Java language detection
 ```
 
 ---
 
-### 🔗 Contract Testing & Service Virtualization (Enterprise-Level)
+## 🧱 Core Architectural Principles
 
-Modern distributed systems rely on multiple microservices, which introduces instability and dependency risks.  
-To ensure reliable and isolated test execution, the framework incorporates both contract testing and service virtualization.
+### **1. Single Responsibility Principle (SRP)**
+Each class has one purpose:
+- Page classes → UI interactions  
+- API clients → HTTP operations  
+- DB utilities → SQL execution  
+- Step definitions → business steps only  
 
-### 🤝 Consumer-Driven Contract Testing (Pact)
-Contract tests validate that the API provider and consumer agree on request/response formats.
+### **2. No Business Logic in Step Definitions**
+StepDefs only orchestrate:
+- Page actions  
+- API calls  
+- DB validations  
 
-**Why it matters:**
-- Detects breaking API changes early
-- Prevents integration failures during deployments
-- Ensures backward compatibility across microservices
+### **3. Thread Safety**
+All parallel execution uses:
+- ThreadLocal WebDriver  
+- ThreadLocal API clients  
+- ThreadLocal DB connections  
 
-**Implementation Approach:**
-- Define consumer expectations using Pact DSL
-- Generate contract files during API test execution
-- Publish contracts to a Pact Broker
-- Provider service validates contracts during CI
+### **4. Environment-Agnostic Execution**
+All environment variables come from:
+- config.properties  
+- Maven profiles  
+- CI/CD secrets  
 
-### 🧪 Service Virtualization (WireMock)
-Used when dependent services are:
-- Unstable
-- Under development
-- Rate-limited
-- Costly to call
-- Not available in lower environments
+### **5. Deterministic Test Behavior**
+- No randomness without seed  
+- No shared state  
+- No time-dependent tests  
 
-**Capabilities:**
-- Mock REST endpoints with dynamic responses
-- Simulate delays, errors, and edge cases
-- Run isolated tests without real backend dependencies
-
-### 🎯 Benefits
-- Stable, deterministic test execution
-- Faster CI/CD pipelines
-- Ability to test negative and rare scenarios safely
-- Reduced dependency on external teams and environments
-
-## 🔄 Event‑Driven Testing & Message Queue Validation (Kafka, RabbitMQ, SNS/SQS)
-
-Modern microservice architectures rely heavily on asynchronous communication.  
-To ensure reliability across distributed systems, the framework includes strategies for validating event flows, message schemas, and consumer/producer behavior.
-
-### 📨 Message Queue Support
-The framework integrates with:
-- **Kafka** (most common in enterprise)
-- **RabbitMQ**
-- **AWS SNS/SQS**
-- **Azure Service Bus**
-
-This enables validation of event-driven workflows end-to-end.
-
-### 🧪 Producer Validation
-When a service publishes an event:
-- Validate message schema against Avro/JSON schema registry
-- Verify required fields, types, and constraints
-- Ensure correlation IDs are included for traceability
-- Confirm event is published to the correct topic/queue
-
-### 📥 Consumer Validation
-When a service consumes an event:
-- Validate correct deserialization of payload
-- Assert business logic triggered by the event
-- Confirm DB updates or downstream API calls
-- Validate idempotency (consumer should handle duplicates)
-
-### 🧬 Schema Evolution Testing
-To prevent breaking changes:
-- All event schemas are versioned
-- Backward/forward compatibility is validated automatically
-- Contract tests ensure producers and consumers remain aligned
-
-### 🧱 End‑to‑End Event Flow Testing
-The framework supports:
-- Publishing synthetic events into Kafka/SQS
-- Waiting for downstream services to process them
-- Validating resulting API responses or DB state
-- Capturing event traces for debugging
-
-### 🛡️ Error & Retry Logic Validation
-Tests simulate:
-- Poison messages
-- Invalid schemas
-- Missing fields
-- Duplicate events
-- Retry and dead-letter queue (DLQ) behavior
-
-### 🎯 Benefits
-- Ensures reliability of asynchronous microservices
-- Detects schema-breaking changes early
-- Validates real-world event flows end-to-end
-- Strengthens system resilience and observability
-
-
-### 📐 Test Pyramid Logic
-We prioritize API and Integration tests over UI tests to ensure a fast, stable, and cost-effective feedback loop.
-- **UI (10%)**: Critical user journeys only (High maintenance).
-- **API/DB (30%)**: Business logic and data integrity (Fast/Stable).
-- **Unit (60%)**: Individual method validation (Instant).
 ---
 
-## 🧩 3. API TESTING STRATEGY
+## 🖥️ UI Architecture (Selenium + POM)
 
-API testing is the backbone of the automation framework, providing fast, stable, and deeply validated coverage of backend business logic. The strategy focuses on correctness, reliability, schema validation, and integration behavior across microservices.
+### 📄 Page Object Example
 
-### 🔧 Tools & Frameworks
-- **RestAssured** for HTTP request/response validation
-- **JSON Schema Validators** for payload structure enforcement
-- **Pact** for consumer-driven contract testing
-- **WireMock** for service virtualization
-- **JDBC** for backend state verification
-
-### 🧪 Types of API Tests
-1. **Smoke API Tests**
-   - Validate core endpoints (health, auth, CRUD basics)
-   - Run on every PR
-
-2. **Functional API Tests**
-   - Validate business logic, workflows, and edge cases
-   - Validate request/response correctness
-
-3. **Contract Tests (Pact)**
-   - Ensure backward compatibility between microservices
-   - Detect breaking changes early in CI
-
-4. **Integration Tests**
-   - Validate API + DB + event flow consistency
-   - Validate downstream service calls
-
-5. **Negative Tests**
-   - Invalid payloads
-   - Missing fields
-   - Unauthorized access
-   - Expired tokens
-
-### 🧬 Schema Validation
-Every API response is validated against:
-- OpenAPI/Swagger definitions
-- JSON schema files stored under `/resources/schemas/`
-- Versioned contract definitions in Pact Broker
-
-This prevents silent API drift.
-
-### 🔄 End-to-End API Workflow Validation
-API tests validate:
-- Request correctness
-- Response correctness
-- DB state changes
-- Event publication (Kafka/SQS)
-- Downstream service calls (via WireMock)
-
-### 🛡️ Security & Authorization Testing
-- Token generation & refresh flow
-- Role-based access control (RBAC)
-- Input sanitization checks (SQLi, XSS patterns)
-- Rate-limit and throttling behavior
-
-### 📊 API Performance Baselines
-Lightweight performance checks:
-- Response time thresholds
-- Payload size validation
-- Retry behavior under load
-
-### 🎯 Benefits
-- Fast feedback loop
-- High stability compared to UI tests
-- Deep validation of backend logic
-- Early detection of breaking changes
-- Strong alignment with microservice architecture
-
-## 🧩 4. UI TESTING STRATEGY
-
-UI testing validates critical user journeys and ensures the front-end behaves correctly across browsers, devices, and environments. The strategy focuses on stability, maintainability, and minimizing flakiness.
-
-### 🧱 Design Principles
-- Page Object Model (POM) for clean separation of UI logic
-- Single Responsibility Principle for each page class
-- Reusable UI actions (click, type, wait, scroll)
-- No assertions inside Page Objects (assertions only in step definitions)
-
-### 🧪 Types of UI Tests
-1. **Smoke UI Tests**
-   - Validate login, navigation, and core flows
-   - Run on every PR
-
-2. **Functional UI Tests**
-   - Validate end-to-end user interactions
-   - Form validation, navigation, error messages
-
-3. **Cross-Browser Tests**
-   - Chrome, Firefox, Edge (configurable)
-   - Executed in parallel via Selenium Grid/Selenoid
-
-4. **Visual/UI Layout Checks (Optional)**
-   - Validate element visibility, alignment, and responsiveness
-
-### ⏱️ Stability & Flakiness Reduction
-- Explicit waits (WebDriverWait)
-- Smart retry logic for transient failures
-- ThreadLocal WebDriver for parallel execution
-- Automatic screenshot capture on failure
-
-### 🌐 Browser & Environment Coverage
-- Headless mode for CI
-- Full browser mode for local debugging
-- Environment-specific URLs loaded from config.properties
-
-### 🔄 UI + API Hybrid Testing
-To reduce UI test count:
-- API calls are used to set up test data
-- UI tests validate only the front-end behavior
-- Backend logic is validated via API tests
-
-### 🎯 Benefits
-- Minimal flakiness
-- Fast execution through parallelism
-- Clean, maintainable POM structure
-- Reduced UI test count without losing coverage
-
-## 🧩 5. DATABASE TESTING STRATEGY
-
-Database testing ensures backend correctness, data integrity, and transactional reliability across the system.  
-The strategy validates that API/UI actions produce the expected changes in the database and that data remains consistent across microservices.
-
-### 🗄️ DB Validation Principles
-- Validate backend state after API/UI operations
-- Ensure referential integrity (FK relationships)
-- Validate status transitions (e.g., pending → active → archived)
-- Confirm audit trail entries are created correctly
-- Ensure no orphaned or inconsistent records
-
-### 🔧 Tools & Frameworks
-- **JDBC** for direct SQL execution
-- **Query Builders** for reusable DB operations
-- **ResultSet Validators** for structured assertions
-- **Schema Validators** for drift detection
-
-### 🧪 Types of DB Tests
-1. **Post‑API Validation**
-   - Validate DB state after API calls
-   - Confirm record creation, updates, and deletions
-
-2. **Post‑UI Validation**
-   - Validate DB state after UI workflows
-   - Ensure UI actions trigger correct backend changes
-
-3. **Transactional Tests**
-   - Validate commit/rollback behavior
-   - Ensure multi‑step workflows update multiple tables correctly
-
-4. **Data Integrity Tests**
-   - Validate foreign keys, constraints, and relationships
-   - Ensure no duplicate or inconsistent records
-
-5. **Schema Validation**
-   - Compare actual schema vs expected schema
-   - Detect missing columns, renamed fields, or type mismatches
-
-### 🔄 Transaction-Level Testing
-To ensure correct transactional behavior:
-- Validate atomicity of multi‑table updates
-- Re‑trigger the same API call to test idempotency
-- Simulate concurrency using parallel test threads
-- Validate rollback behavior on failure
-
-### 🧬 Microservice Data Consistency
-For distributed systems:
-- API responses are cross‑checked with DB state
-- Event-driven updates (Kafka/SQS) are validated against DB changes
-- Saga/Orchestration flows are verified end‑to‑end
-- Replication lag is measured and logged
-
-### 🧹 Test Data Isolation
-To ensure deterministic results:
-- Each test uses unique identifiers (UUIDs)
-- Data cleanup scripts run after execution
-- Parallel tests use isolated datasets
-- Nightly runs can restore DB snapshots
-
-### 📊 DB Observability
-The framework logs:
-- Executed SQL queries
-- Query execution time
-- Row counts and affected records
-- Correlation IDs for tracing across services
-
-### 🎯 Benefits
-- Ensures backend correctness beyond API/UI validation  
-- Detects schema-breaking changes early  
-- Validates real-world transactional behavior  
-- Strengthens data integrity across microservices  
-- Reduces production defects caused by inconsistent data  
-
-## 🧩 6. INTEGRATION TESTING STRATEGY
-
-Integration testing validates how multiple components (API, UI, DB, events, and external services) work together as a cohesive system.  
-The goal is to ensure that cross‑service workflows behave correctly under real-world conditions.
-
-### 🔗 Scope of Integration Testing
-Integration tests cover interactions between:
-- UI → API → DB
-- API → DB → Event Bus (Kafka/SQS)
-- API → External Services (via WireMock)
-- Microservice → Microservice (via Pact contracts)
-- API → Authentication/Authorization layers
-
-These tests validate business workflows end-to-end without requiring full UI coverage.
-
-### 🧪 Types of Integration Tests
-
-#### 1. **API + DB Integration**
-- Validate that API calls correctly update backend state
-- Confirm DB constraints, triggers, and audit logs
-- Validate multi-table updates and transactional behavior
-
-#### 2. **UI + API Integration**
-- UI triggers API calls
-- API responses drive UI state changes
-- API failures surface correct UI error messages
-
-#### 3. **Event-Driven Integration**
-- API publishes events to Kafka/SQS
-- Downstream services consume events
-- DB state is updated accordingly
-- Event traces are validated using correlation IDs
-
-#### 4. **Service Virtualization Integration**
-Used when dependent services are:
-- Unstable
-- Under development
-- Rate-limited
-- Not available in lower environments
-
-WireMock simulates:
-- Success responses
-- Error responses
-- Timeouts
-- Edge cases
-
-#### 5. **Contract Integration (Pact)**
-- Ensures consumer and provider remain compatible
-- Detects breaking schema changes early
-- Validates versioned contracts in CI
-
-### 🧬 Integration Workflow Validation
-Integration tests validate:
-- End-to-end business flows
-- Data propagation across services
-- API → DB → Event → Downstream API chains
-- Authentication and authorization flows
-- Error handling and retry logic
-
-### 🧱 Environment Requirements
-Integration tests run in:
-- QA/Staging environments
-- Ephemeral test environments (Docker/Kubernetes)
-- Local environments using mocks and stubs
-
-Environment parity checks ensure:
-- API versions match expected schema
-- DB schema is aligned with release version
-- Feature flags are consistent across environments
-
-### 🧹 Test Data Management for Integration Tests
-- Test data is created via API calls (not UI)
-- DB cleanup scripts run after execution
-- Unique identifiers prevent collisions in parallel runs
-- Event-driven workflows use synthetic events for isolation
-
-### 📊 Reporting & Observability
-Integration tests produce:
-- Allure reports with step-by-step traces
-- API logs with correlation IDs
-- DB query logs
-- Event traces (Kafka/SQS)
-- WireMock request/response logs
-
-These artifacts help debug complex multi-service flows.
-
-### 🎯 Benefits
-- Validates real-world business workflows  
-- Ensures microservices communicate correctly  
-- Detects integration issues early in CI/CD  
-- Reduces production defects caused by cross-service failures  
-- Strengthens system reliability and resilience
-
-
-## 🧩 7. END‑TO‑END (E2E) TESTING STRATEGY
-
-End‑to‑End testing validates complete business workflows from the user interface down through APIs, databases, event systems, and external integrations.  
-The goal is to ensure that the system behaves correctly from the perspective of a real user.
-
-### 🎯 Purpose of E2E Tests
-E2E tests answer one question:
-
-**“Can a real user complete this workflow successfully in a production‑like environment?”**
-
-They validate:
-- UI → API → DB → Event Bus → Downstream Services
-- Authentication and authorization flows
-- Multi‑step business processes
-- Cross‑service data consistency
-- Realistic user journeys
-
-### 🧪 What E2E Tests Cover
-E2E tests focus on **critical business flows**, such as:
-- User login and session handling
-- Creating a booking and verifying it in DB
-- Updating user profile and validating API + UI consistency
-- Payment or checkout flows (if applicable)
-- Multi-service workflows involving events (Kafka/SQS)
-
-These tests ensure the system works as a whole.
-
-### 🚫 What E2E Tests Do NOT Cover
-To avoid bloat and flakiness:
-- E2E tests do **not** validate every field or edge case  
-- E2E tests do **not** replace API or integration tests  
-- E2E tests do **not** test UI layout or styling  
-- E2E tests do **not** test negative scenarios unless business‑critical  
-
-E2E tests are **high value, low volume**.
-
-### 🧱 E2E Test Architecture
-E2E tests combine:
-- Selenium UI actions  
-- RestAssured API calls  
-- JDBC DB validation  
-- Event-driven validation (Kafka/SQS)  
-- WireMock for external service simulation  
-
-Each step is validated at the appropriate layer.
-
-### 🔄 Example E2E Workflow
-1. Create a user via API  
-2. Log in via UI  
-3. Trigger a booking via UI  
-4. Validate booking record in DB  
-5. Validate event published to Kafka  
-6. Validate downstream service consumed the event  
-7. Validate UI reflects updated state  
-
-This ensures full system correctness.
-
-### 🧹 Data Management for E2E Tests
-- Test data created via API for speed  
-- Cleanup scripts remove stale records  
-- UUIDs ensure isolation in parallel runs  
-- DB snapshots can be restored for nightly E2E runs  
-
-### 🧪 Stability & Flakiness Controls
-- Explicit waits for UI  
-- Retry logic for transient API failures  
-- Event polling with timeouts  
-- Environment health checks before execution  
-
-### 📊 Reporting & Observability
-E2E tests produce:
-- Allure reports with screenshots  
-- API traces with correlation IDs  
-- DB query logs  
-- Event traces  
-- WireMock logs  
-
-This makes debugging multi‑service failures straightforward.
-
-### 🎯 Benefits
-- Validates real user workflows end‑to‑end  
-- Ensures cross‑service reliability  
-- Detects integration issues missed by unit/API tests  
-- Provides highest confidence before release  
-- Aligns with enterprise QA best practices  
-
-
-
-## 📄 8. TEST CASE EXAMPLES
-
-### ✅ Example 1: UI Test (Login Page)
-```gherkin
-Feature: User Login
-  Scenario: Successful login
-    Given I navigate to Login page...
-
-  @smoke @regression
-  Scenario: Successful login with valid credentials
-    Given I navigate to the Login page
-    When I enter valid username and password
-    And I click the Login button
-    Then I should be redirected to the "Secure Area" page
-    And I should see the message "You logged into a secure area!"
-```
-Java Implementation (Page Object Model) This shows how the Gherkin steps interact with the UI elements via Selenium.
 ```java
 public class LoginPage extends BasePage {
-    // Locators
-    private final By usernameField = By.id("username");
-    private final By passwordField = By.id("password");
-    private final By loginButton = By.cssSelector("button[type='submit']");
-    private final By flashMessage = By.id("flash");
 
-    // Actions
+    private final By username = By.id("username");
+    private final By password = By.id("password");
+    private final By loginBtn = By.cssSelector("button[type='submit']");
+    private final By flashMsg = By.id("flash");
+
     public void login(String user, String pass) {
-        enterText(usernameField, user);
-        enterText(passwordField, pass);
-        click(loginButton);
+        type(username, user);
+        type(password, pass);
+        click(loginBtn);
     }
 
-    public String getMessageText() {
-        return getText(flashMessage);
+    public String getFlashMessage() {
+        return getText(flashMsg).trim();
     }
 }
 ```
 
-### 🧪 Example 2: API Test (Booking Creation)
+---
+
+### 🔧 BasePage (Reusable Actions)
+
+```java
+public abstract class BasePage {
+
+    protected WebDriver driver = DriverFactory.getDriver();
+    protected WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+    protected void click(By locator) {
+        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+    }
+
+    protected void type(By locator, String text) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).sendKeys(text);
+    }
+
+    protected String getText(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getText();
+    }
+
+    protected boolean isVisible(By locator) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+    protected void waitForInvisibility(By locator) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
+    protected void scrollIntoView(By locator) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+}
+```
+
+---
+
+## 🔌 API Architecture (RestAssured)
+
+The API layer is designed to provide a clean, reusable, and extensible abstraction over HTTP operations.  
+It ensures consistent request building, logging, schema validation, and environment‑aware configuration.
+
+---
+
+### 📄 Base API Client
+
+```java
+public class BaseApi {
+
+    protected RequestSpecification request() {
+        return RestAssured
+                .given()
+                .baseUri(Config.getBaseUrl())
+                .contentType(ContentType.JSON)
+                .log().all();
+    }
+}
+```
+
+---
+
+### 📄 Example API Client (Booking)
+
+```java
+public class BookingClient extends BaseApi {
+
+    public Response createBooking(Object payload) {
+        return request()
+                .body(payload)
+                .post("/booking")
+                .then()
+                .log().all()
+                .extract().response();
+    }
+
+    public Response getBooking(int id) {
+        return request()
+                .get("/booking/" + id)
+                .then()
+                .log().all()
+                .extract().response();
+    }
+}
+```
+
+---
+
+### 📄 JSON Schema Validation Example
+
+```java
+public class SchemaValidator {
+
+    public static void validate(Response response, String schemaPath) {
+        response.then().assertThat()
+                .body(JsonSchemaValidator.matchesJsonSchema(
+                        new File("src/test/resources/schemas/" + schemaPath)
+                ));
+    }
+}
+```
+
+---
+
+### 📄 Payload Builder Example
+
+```java
+public class BookingPayload {
+
+    public static Map<String, Object> create(String first, String last) {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("firstname", first);
+        payload.put("lastname", last);
+        payload.put("totalprice", 123);
+        payload.put("depositpaid", true);
+
+        Map<String, String> dates = new HashMap<>();
+        dates.put("checkin", "2024-01-01");
+        dates.put("checkout", "2024-01-10");
+
+        payload.put("bookingdates", dates);
+        return payload;
+    }
+}
+```
+
+---
+
+### 📄 API Test Example (Cucumber Step)
+
+```java
+@When("I create a booking for {string} {string}")
+public void createBooking(String first, String last) {
+    payload = BookingPayload.create(first, last);
+    response = bookingClient.createBooking(payload);
+}
+```
+
+---
+
+### 📌 API Architecture Principles
+
+- All API calls go through BaseApi  
+- No hardcoded URLs  
+- All payloads built via builders  
+- All schemas stored in `/schemas`  
+- All responses logged  
+- All validations reusable  
+- All clients stateless and thread‑safe
+
+--- 
+
+## 🗄️ Database Architecture (JDBC)
+
+The database layer provides a clean, reusable abstraction for executing SQL queries, validating backend state, and supporting integration and E2E workflows.  
+It ensures thread‑safe connections, parameterized queries, and consistent validation patterns.
+
+---
+
+### 📄 Database Utility (Connection + Query Execution)
+
+```java
+public class DatabaseUtils {
+
+    private static final ThreadLocal<Connection> connection = new ThreadLocal<>();
+
+    public static Connection getConnection() throws SQLException {
+        if (connection.get() == null || connection.get().isClosed()) {
+            connection.set(DriverManager.getConnection(
+                    Config.getDbUrl(),
+                    Config.getDbUser(),
+                    Config.getDbPassword()
+            ));
+        }
+        return connection.get();
+    }
+
+    public static ResultSet executeQuery(String query, Object... params) throws SQLException {
+        PreparedStatement stmt = getConnection().prepareStatement(query);
+        for (int i = 0; i < params.length; i++) {
+            stmt.setObject(i + 1, params[i]);
+        }
+        return stmt.executeQuery();
+    }
+
+    public static int executeUpdate(String query, Object... params) throws SQLException {
+        PreparedStatement stmt = getConnection().prepareStatement(query);
+        for (int i = 0; i < params.length; i++) {
+            stmt.setObject(i + 1, params[i]);
+        }
+        return stmt.executeUpdate();
+    }
+
+    public static void closeConnection() {
+        try {
+            if (connection.get() != null) {
+                connection.get().close();
+                connection.remove();
+            }
+        } catch (SQLException ignored) {}
+    }
+}
+```
+
+---
+
+### 📄 Example Query Validator
+
+```java
+public class UserDbValidator {
+
+    public static boolean userExists(String email) throws SQLException {
+        ResultSet rs = DatabaseUtils.executeQuery(
+                "SELECT COUNT(*) FROM users WHERE email = ?",
+                email
+        );
+        rs.next();
+        return rs.getInt(1) > 0;
+    }
+
+    public static String getUserRole(int userId) throws SQLException {
+        ResultSet rs = DatabaseUtils.executeQuery(
+                "SELECT role FROM users WHERE id = ?",
+                userId
+        );
+        return rs.next() ? rs.getString("role") : null;
+    }
+}
+```
+
+---
+
+### 📄 DB Validation in Cucumber Step
+
+```java
+@Then("the user {string} should exist in the database")
+public void validateUserInDb(String email) throws SQLException {
+    assertTrue(UserDbValidator.userExists(email));
+}
+```
+
+---
+
+### 📌 Database Architecture Principles
+- ThreadLocal connections for parallel execution
+
+- No raw SQL in Step Definitions
+
+- All queries parameterized (SQL injection safe)
+
+- All DB validations reusable
+
+- DB used only for validation, not for test data creation
+
+- Connections closed after each scenario
+
+---
+
+## 🔗 Integration Architecture
+
+Integration tests validate how multiple components interact across layers:
+- UI → API → DB  
+- API → DB → Events  
+- API → External Services (WireMock)  
+- API → Contract Providers (Pact)  
+
+The goal is to ensure that data flows, business rules, and cross‑service interactions behave consistently across the entire system.
+
+---
+
+### 📄 Integration Test Example (UI → API → DB)
+
+1. Create user via API  
+2. Login via UI  
+3. Trigger booking via UI  
+4. Validate booking via API  
+5. Validate DB state  
+
+---
+
+### 📄 WireMock Stub Example (External Service Virtualization)
+
+```java
+WireMock.stubFor(get(urlEqualTo("/rates"))
+        .willReturn(aResponse()
+                .withStatus(200)
+                .withHeader("Content-Type", "application/json")
+                .withBody("{ \"rate\": 1.23 }")));
+```
+
+---
+
+### 📄 Kafka Event Validation Example
+
+```java
+public class KafkaEventValidator {
+
+    public static boolean eventReceived(String topic, String key) {
+        ConsumerRecords<String, String> records = KafkaClient.poll(topic, 5000);
+        for (ConsumerRecord<String, String> record : records) {
+            if (record.key().equals(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+```
+
+---
+
+### 📄 Integration Step Example (Cucumber)
+
+```java
+@Then("a booking event should be published for user {int}")
+public void validateBookingEvent(int userId) {
+    assertTrue(KafkaEventValidator.eventReceived("booking-events", String.valueOf(userId)));
+}
+```
+
+---
+
+### 📌 Integration Architecture Principles
+- UI tests rely on API for setup
+
+- API tests validate DB state
+
+- DB tests validate data integrity
+
+- Events validated via Kafka/SQS consumers
+
+- External dependencies virtualized via WireMock
+
+- Contract compatibility validated via Pact
+
+- No integration logic inside Step Definitions
+
+- All integration flows deterministic and repeatable
+
+---
+
+## 🌐 E2E Architecture
+
+End‑to‑End (E2E) tests validate real user journeys across the entire system, combining UI, API, DB, and events.  
+They cover only business‑critical flows and do not duplicate API or UI tests.
+
+---
+
+### 🎯 Goals of E2E
+
+- Validate real business workflows end‑to‑end  
+- Ensure cross‑service integration works as expected  
+- Provide release confidence  
+- Catch issues that only appear when all layers interact  
+
+---
+
+### 🔁 Typical E2E Flow
+
+Example: “Booking creation and confirmation”
+
+1. Create user via API  
+2. Login via UI  
+3. Create booking via UI  
+4. Validate booking via API  
+5. Validate DB state  
+6. Validate Kafka/SQS event  
+
+---
+
+### 🧩 E2E Principles
+
+- Minimal number of scenarios (only business‑critical)  
+- Test data prepared via API, not UI  
+- Validation via API + DB  
+- Events validated when part of the flow  
+- No business logic in Step Definitions  
+- E2E tests run last in CI/CD  
+
+---
+
+### 📌 Example E2E Scenarios
+
+- User registration → activation → first login  
+- Booking creation → modification → cancellation → refund validation  
+- Order creation → payment → invoice generation → notification dispatch
+
+---
+
+### 🧪 5.1 Unit Testing
+
+Unit tests validate individual classes and methods in complete isolation from external systems.
+
+---
+
+### 🎯 Purpose
+
+- Validate core business logic  
+- Catch defects early (shift‑left)  
+- Ensure deterministic behavior  
+- Provide fast feedback in CI  
+
+---
+
+### 🛠 Tools
+
+- JUnit / TestNG  
+- Mockito  
+- Hamcrest / AssertJ  
+
+---
+
+### 📄 Example: Pure Unit Test
+
+```java
+public class PriceCalculatorTest {
+
+    @Test
+    public void testCalculateTotal() {
+        PriceCalculator calc = new PriceCalculator();
+        double result = calc.calculateTotal(100, 0.2);
+        assertEquals(120.0, result, 0.001);
+    }
+}
+```
+
+---
+
+### 📄 Example: Mockito Mocking
+
+```java
+public class UserServiceTest {
+
+    @Mock
+    private UserRepository repo;
+
+    @InjectMocks
+    private UserService service;
+
+    @Test
+    public void testFindUser() {
+        when(repo.findByEmail("test@mail.com"))
+                .thenReturn(new User("test@mail.com", "John"));
+
+        User user = service.findUser("test@mail.com");
+
+        assertThat(user.getName()).isEqualTo("John");
+    }
+}
+```
+
+---
+
+### 📌 Principles
+- No DB
+
+- No API
+
+- No WebDriver
+
+- No network calls
+
+- Everything mocked
+
+- Fast (<100ms per test)
+
+- High coverage for core logic
+
+---
+
+### 🔌 5.2 API Testing
+
+API tests validate backend business logic, workflows, and data transformations without involving the UI layer.
+
+---
+
+### 🎯 Purpose
+
+- Validate request/response correctness  
+- Validate business rules  
+- Validate authentication & authorization  
+- Validate schema stability  
+- Validate DB state after API calls  
+- Detect breaking changes early  
+
+---
+
+### 🛠 Tools
+
+- RestAssured  
+- JSON Schema Validator  
+- Hamcrest / AssertJ  
+- Pact (for contract testing)  
+
+---
+
+### 📄 Example: Basic API Test
+
 ```java
 @Test
-public void createBooking() {
-    given()
-        .baseUri(BASE_URL)
-        .contentType(ContentType.JSON)
-        .body(BookingPayload.createBookingBody())
-    .when()
-        .post("/booking")
-    .then()
-        .statusCode(200)
-        .body("booking.firstname", equalTo("Jim"))
-        .body("booking.lastname", equalTo("Brown"));
+public void testCreateBooking() {
+    Map<String, Object> payload = BookingPayload.create("John", "Doe");
+
+    Response response = new BookingClient().createBooking(payload);
+
+    response.then().statusCode(200);
+    assertThat(response.jsonPath().getString("booking.firstname"))
+            .isEqualTo("John");
 }
 ```
 
-### 🧩 Example 3: Database Validation
-Business Logic: Verify that when a user is created, the record is correctly persisted in the PostgreSQL/MySQL database with the correct status.
+---
+
+### 📄 Example: Schema Validation
+
 ```java
-@Test(groups = {"database", "regression"})
-public void verifyUserPersistence() throws SQLException {
-    String userId = "1001";
-    String expectedEmail = "sergei.test@example.com";
+@Test
+public void testBookingSchema() {
+    Response response = new BookingClient().getBooking(1);
 
-    // 1. Execute SQL Query via JDBC Utility
-    String query = "SELECT email, status FROM users WHERE id = ?";
-    ResultSet rs = DatabaseUtils.executeQuery(query, userId);
+    SchemaValidator.validate(response, "booking-schema.json");
+}
+```
 
-    // 2. Perform Assertions on Result Set
-    if (rs.next()) {
-        String actualEmail = rs.getString("email");
-        String status = rs.getString("status");
+---
 
-        Assert.assertEquals(actualEmail, expectedEmail, "Database email mismatch!");
-        Assert.assertEquals(status, "ACTIVE", "User should have ACTIVE status in DB");
-    } else {
-        Assert.fail("Record not found in Database for User ID: " + userId);
+### 📄 Example: Negative Test
+
+```java
+@Test
+public void testUnauthorizedAccess() {
+    Response response = RestAssured
+            .given()
+            .baseUri(Config.getBaseUrl())
+            .get("/admin/secure");
+
+    response.then().statusCode(401);
+}
+```
+
+---
+
+### 📌 Principles
+- No UI in API tests
+
+- No DB writes directly — only via API
+
+- All responses validated
+
+- All schemas versioned
+
+- All endpoints covered with positive + negative + edge cases
+
+- API tests run on every PR
+
+---
+
+### 🖥️ 5.3 UI Testing
+
+UI tests validate critical user flows using Selenium WebDriver.  
+They do not cover all business logic — only what cannot be validated at the API level.
+
+---
+
+### 🎯 Purpose
+
+- Validate real user interactions  
+- Validate UI behavior and layout‑critical elements  
+- Validate end‑to‑end flows involving UI  
+- Catch regressions in frontend logic  
+
+---
+
+### 🛠 Tools
+
+- Selenium WebDriver  
+- WebDriverManager  
+- TestNG  
+- Cucumber (BDD)  
+- Allure (screenshots, logs)  
+
+---
+
+### 📄 Example: UI Login Test (Step Definition)
+
+```java
+@When("I log in as {string} with password {string}")
+public void login(String user, String pass) {
+    LoginPage login = new LoginPage();
+    login.login(user, pass);
+}
+```
+
+---
+
+### 📄 Example: UI Assertion
+
+```java
+@Then("I should see a success message")
+public void validateSuccess() {
+    DashboardPage dashboard = new DashboardPage();
+    assertTrue(dashboard.isLoaded());
+}
+```
+
+---
+
+### 📄 Example: Page Object Snippet
+
+```java
+public class DashboardPage extends BasePage {
+
+    private final By header = By.cssSelector("h1.dashboard");
+
+    public boolean isLoaded() {
+        return isVisible(header);
     }
 }
 ```
-Java Implementation (JDBC + TestNG) This shows how wrap database connections into reusable utility methods for clean test scripts.
-
----
-### 🐞 9. BUG REPORT EXAMPLES
-| ID      | Summary                            | Steps to Reproduce                    | Expected Result         | Actual Result             | Severity | Status      |
-| ------- | ---------------------------------- | ------------------------------------- | ----------------------- | ------------------------- | -------- | ----------- |
-| BUG-001 | Login fails with valid credentials | Enter correct user/pass → click login | Redirect to secure area | Stuck on login page       | High     | Open        |
-| BUG-002 | API returns 500 on invalid token   | Call POST /booking with expired token | 401 Unauthorized        | 500 Internal Server Error | Medium   | In Progress |
-| BUG-003 | DB data not synced                 | Create booking via UI                 | DB should have entry    | Record missing            | High     | Open        |
----
-### 🧰 10. TEST SUITE STRUCTURE
-| Suite           | Scope                                  | Type          |
-| --------------- | -------------------------------------- | ------------- |
-| SmokeSuite      | Sanity check for critical endpoints/UI | UI + API      |
-| RegressionSuite | Full feature coverage                  | UI + API + DB |
-| ApiSuite        | Independent API test runs              | API           |
-| DbSuite         | Data-level validation                  | DB            |
----
-### 📊 11. TEST REPORTING
-Your framework provides dual-layer visibility: technical depth for developers and high-level summaries for business stakeholders.
-
-📘 **Allure Report (Rich Dashboard)**
-
-Location: target/allure-results/
-
-Command: allure serve target/allure-results
-
-Features: Includes failure screenshots, categorized defects (Product vs. Test defects), and execution history trends.
-
-📗 **Cucumber HTML Report (Lightweight)**
-
-Location: target/cucumber-reports/index.html
-
-Usage: A single-file, portable HTML report that can be opened in any browser without a server. It provides a clean, step-by-step breakdown of Gherkin scenario results.
-
-## 🩺 Failure Triage Workflow & Defect Governance
-
-A mature automation framework must clearly separate real product issues from test-related failures.  
-This workflow ensures consistent, repeatable, and transparent triage across teams.
-
-### 🧭 Daily Triage Process
-1. **Collect Results**  
-   Review Allure and Cucumber HTML reports from the latest CI run.
-
-2. **Categorize Failures**  
-   Each failure is classified into one of the following:
-   - **Product Defect** (functional issue)
-   - **Test Defect** (broken locator, outdated assertion, bad test data)
-   - **Environment Issue** (server down, DB unavailable)
-   - **Flaky Test** (intermittent, non-deterministic)
-
-3. **Assign Ownership**
-   - Product defects → Development team  
-   - Test defects → Automation team  
-   - Environment issues → DevOps / Platform team  
-   - Flaky tests → Automation team for stabilization
-
-### 🧪 Flaky Test Governance
-- Flaky tests are automatically tagged in Allure.
-- Any test failing more than 2 times in 10 runs is quarantined.
-- Quarantined tests do **not** block CI pipelines.
-- A stabilization ticket is created and tracked until resolved.
-
-### 🐞 Defect Lifecycle
-- All defects are logged in Jira with:
-  - Steps to reproduce  
-  - Logs, screenshots, API traces  
-  - Environment details  
-  - Test data used  
-- Defects are linked to:
-  - Feature files  
-  - Test case IDs  
-  - Requirements in RTM  
-
-### 📈 Quality Metrics Tracked
-- Pass rate per suite  
-- Flakiness index  
-- Mean time to fix (MTTF) test defects  
-- Number of quarantined tests  
-- Defect leakage to higher environments  
-
-### 🎯 Benefits
-- Prevents false alarms in CI/CD  
-- Ensures accountability across teams  
-- Improves long-term test suite stability  
-- Provides visibility into automation health  
-
-## 📡 Observability, Logging & Telemetry Integration
-
-To support fast debugging and deep system insight, the framework integrates with modern observability practices used in enterprise environments.
-
-### 🧭 Structured Logging
-All logs follow a structured JSON format to ensure machine readability:
-
-- Timestamp  
-- Test name and ID  
-- Thread ID  
-- Environment  
-- API endpoint or UI action  
-- Request/response payloads (masked)  
-- Correlation ID  
-
-This enables easy filtering and aggregation in log platforms.
-
-### 🔗 Correlation IDs for End-to-End Tracing
-Every test execution generates a unique **Correlation ID** that is:
-
-- Injected into API headers  
-- Logged in UI actions  
-- Passed to backend services  
-- Used to trace requests across microservices  
-
-This allows engineers to correlate test failures with backend logs instantly.
-
-### 📡 Telemetry & Metrics
-The framework emits lightweight metrics such as:
-
-- API response times  
-- UI action durations  
-- Retry counts  
-- Flakiness indicators  
-- Test execution time per module  
-
-These metrics can be pushed to:
-
-- Grafana  
-- Prometheus  
-- Datadog  
-- New Relic  
-
-### 🧪 Integration with Observability Platforms
-When enabled, the framework can:
-
-- Push logs to ELK / OpenSearch  
-- Push traces to Jaeger or Zipkin  
-- Push metrics to Prometheus  
-- Annotate dashboards with test run IDs  
-
-This gives DevOps and QA a shared view of system health.
-
-### 🛡️ Sensitive Data Masking
-All logs automatically mask:
-
-- Passwords  
-- Tokens  
-- PII (emails, phone numbers, SSNs)  
-- Credit card numbers  
-
-This ensures compliance with security and privacy standards.
-
-### 🎯 Benefits
-- Faster debugging of complex failures  
-- Full visibility into distributed systems  
-- Ability to correlate test failures with backend logs  
-- Improved collaboration between QA, Dev, and DevOps  
-- Stronger alignment with enterprise observability practices  
 
 ---
 
-### 🧱 12. CI/CD PIPELINE EXAMPLE (GitHub Actions)
-This configuration automates the testing lifecycle: triggering on every code push, executing the suite in a headless Linux environment, and generating a visual quality report.
+### 📄 Example: Screenshot on Failure (Hook)
 
-```YAML
-name: Java Maven Test Execution
-
-on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v4
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: 'maven' # Optimizes build speed by caching dependencies
-
-      - name: Execute Tests
-        run: mvn clean test -DsuiteXmlFile=testng.xml
-
-      - name: Generate Allure Report
-        if: always() # Ensures reports are generated even if tests fail
-        run: |
-          npm install -g allure-commandline
-          allure generate target/allure-results --clean -o target/allure-report
-
-      - name: Upload Test Artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: target/allure-report
-          retention-days: 7
+```java
+@After
+public void tearDown(Scenario scenario) {
+    if (scenario.isFailed()) {
+        byte[] screenshot = ((TakesScreenshot) DriverFactory.getDriver())
+                .getScreenshotAs(OutputType.BYTES);
+        scenario.attach(screenshot, "image/png", "failure");
+    }
+    DriverFactory.quitDriver();
+}
 ```
 
-## 🚦 Release Readiness & Quality Gates (Enterprise-Level)
+---
 
-Automation is not just about running tests — it directly influences release decisions.  
-To ensure only high‑quality builds progress through the pipeline, strict quality gates are enforced.
+### 📌 Principles
+- UI tests cover only critical flows
 
-### 🧱 Pre‑Merge Quality Gates
-Before any PR is merged into `develop` or `main`:
-- All API and UI smoke tests must pass
-- SonarQube quality gate must be green
-- No new critical or major issues introduced
-- Code coverage on new code ≥ 80%
-- All reviewers must approve the PR
+- No test data creation via UI
 
-If any gate fails, the PR is blocked automatically.
+- No waits except explicit waits
 
-### 🚀 Pre‑Deployment Quality Gates
-Before deploying to QA/Staging:
-- Full regression suite must pass
-- No flaky tests in critical-path scenarios
-- Environment parity checks must succeed
-- Contract tests (Pact) must validate provider/consumer compatibility
-- DB schema version must match expected release version
+- No assertions inside Page Objects
 
-### 🛡️ Production Release Gates
-Before promoting a build to Production:
-- Smoke tests executed in Staging must pass
-- API latency must remain within SLA thresholds
-- No open high‑severity defects linked to the release
-- Security scans (SAST/DAST) must be clean
-- Accessibility checks must show no critical violations
+- Page Objects contain actions only
 
-### 📊 Release Readiness Dashboard
-The CI pipeline publishes a dashboard summarizing:
-- Pass/fail rates per suite
-- Flakiness index
-- Defect leakage metrics
-- Performance baseline comparisons
-- Contract test results
-- Environment health status
+- UI tests run in parallel where possible
 
-### 🎯 Benefits
-- Prevents unstable builds from reaching higher environments
-- Ensures consistent release quality across teams
-- Provides transparency for QA, Dev, and DevOps
-- Reduces production incidents and rollbacks
-
-## ☁️ Cloud‑Native & Containerized Test Execution Strategy
-
-To support scalable, fast, and isolated test execution, the framework is designed to run natively in containerized and cloud environments.
-
-### 🐳 Docker‑Based Test Execution
-All test suites can be executed inside Docker containers to ensure:
-- Consistent environments across developers and CI
-- No dependency conflicts on local machines
-- Fast provisioning of test runners
-- Reproducible builds
-
-A dedicated `Dockerfile` defines:
-- JDK version
-- Maven dependencies
-- Browser drivers (Chrome/Firefox)
-- Test execution entrypoints
-
-### ☸️ Kubernetes‑Ready Architecture
-For large-scale organizations, the framework supports distributed execution in Kubernetes:
-
-- Each test shard runs as a separate pod
-- Horizontal Pod Autoscaling (HPA) scales test capacity automatically
-- Logs and artifacts are pushed to centralized storage (S3, Azure Blob, GCS)
-- Selenium Grid / Selenoid can run inside the cluster for UI tests
-
-This enables massive parallelism and reduces execution time dramatically.
-
-### 🧪 Ephemeral Test Environments
-The framework integrates with DevOps pipelines to spin up temporary environments:
-
-- API mocks or full microservices deployed on demand
-- Database containers seeded with test data
-- Environment destroyed after execution to reduce cost
-
-This eliminates cross‑team interference and stale data issues.
-
-### 🌐 Cloud Provider Integration
-The framework supports execution on:
-- GitHub Actions hosted runners
-- AWS CodeBuild / ECS / EKS
-- Azure DevOps Pipelines / AKS
-- Google Cloud Build / GKE
-
-Artifacts (logs, reports, screenshots) are uploaded to:
-- S3 buckets  
-- Azure Blob Storage  
-- Google Cloud Storage  
-
-### 🔄 Distributed Test Sharding
-To reduce execution time:
-- Tests are split into shards based on runtime history
-- Each shard runs independently in parallel
-- Results are aggregated into a unified Allure report
-
-### 🎯 Benefits
-- Massive parallel execution with minimal infrastructure cost  
-- Fully reproducible test environments  
-- Faster CI/CD pipelines (minutes instead of hours)  
-- Zero configuration drift across machines  
-- Cloud‑native scalability for enterprise workloads  
+- Failures always include screenshots
 
 ---
 
-### 🧩 13. TEST DATA MANAGEMENT
-- Store test data under /src/test/resources/testdata/
-- Use Faker library to generate random input dynamically
-- Maintain environment.properties for URLs and credentials
+### 🗄️ 5.4 DB Testing
 
-## 🗂️ Test Data Versioning & Governance (Enterprise-Level)
-
-To ensure consistency and reproducibility across environments, all test data follows a strict versioning and governance model:
-
-### 🔑 Versioning Rules
-- All static test data (JSON, SQL seeds, payload templates) is stored under version control (Git).
-- Each change to test data requires a pull request and reviewer approval.
-- Environment-specific data is separated into dedicated folders (dev/qa/stage).
-
-### 🧬 Data Lifecycle Management
-- Test data is tagged per release cycle to ensure historical reproducibility.
-- Deprecated data sets are archived but never deleted.
-- Automated cleanup scripts remove stale or orphaned records after test execution.
-
-### 🧪 Dynamic Data Strategy
-- Faker-generated data is logged and stored for debugging failed runs.
-- Unique identifiers (UUIDs, timestamps) prevent collisions in parallel execution.
-- Sensitive data is masked before being stored in logs or reports.
-
-### 🎯 Benefits
-- Eliminates “works on my machine” inconsistencies.
-- Ensures deterministic test outcomes across CI/CD pipelines.
-- Enables full traceability of data changes across releases.
+Database testing validates data integrity, consistency, and correctness after API/UI operations.  
+DB tests never create data directly — they only verify system state.
 
 ---
 
-### 🧩 14. RISKS & MITIGATION
-| Risk                    | Mitigation                         |
-| ----------------------- | ---------------------------------- |
-| Flaky tests             | Add waits, retry logic             |
-| Locator changes         | Centralize in POM                  |
-| Environment downtime    | Use mock servers or virtualization |
-| Test data inconsistency | Add teardown scripts               |
+### 🎯 Purpose
 
-## 🛡️ Performance, Security & Accessibility Testing Hooks
-
-Although the primary focus of this framework is functional automation, it includes integration points for performance, security, and accessibility validation to support enterprise‑grade quality standards.
-
-### 🚀 Performance Testing Hooks
-While full load testing is out of scope for UI/API automation, the framework provides:
-- Lightweight response‑time assertions for critical API endpoints
-- Baseline performance metrics captured during CI runs
-- Integration points for JMeter/Gatling to trigger performance suites post‑deployment
-- Threshold alerts when API/UI response times exceed defined SLAs
-
-### 🔐 Security Testing Considerations
-Security validation is incorporated at the automation layer through:
-- Input validation and negative testing (SQLi, XSS patterns)
-- Authentication/authorization checks (role‑based access)
-- Token expiration and refresh flow validation
-- Integration hooks for OWASP ZAP or Burp Suite automated scans
-
-These checks help detect common vulnerabilities early in the pipeline.
-
-### ♿ Accessibility Testing Hooks
-To ensure compliance with WCAG 2.1 AA standards:
-- Axe-core or Pa11y can be triggered during UI test execution
-- Automated checks for ARIA labels, contrast ratios, and keyboard navigation
-- Accessibility violations surfaced in CI reports for triage
-
-### 🎯 Benefits
-- Early detection of performance regressions
-- Improved security posture through automated negative testing
-- Better user experience and compliance with accessibility standards
-- Stronger alignment with enterprise QA expectations
-
-## 🎯 Risk‑Based Testing & Prioritization Model
-
-To maximize coverage while minimizing execution time, the framework follows a structured risk‑based testing model.  
-This ensures that the most critical business flows are always validated first.
-
-### 🧭 Risk Classification
-Each feature is evaluated across three dimensions:
-
-1. **Business Impact**  
-   - Revenue‑critical  
-   - Compliance‑critical  
-   - Customer‑visible  
-   - Internal‑only
-
-2. **Failure Probability**  
-   - Frequency of code changes  
-   - Complexity of logic  
-   - Number of integrations  
-   - Historical defect density
-
-3. **Technical Volatility**  
-   - UI instability  
-   - API schema changes  
-   - Third‑party dependencies  
-   - Feature flags or toggles
-
-Each feature receives a **Risk Score (1–5)** used to determine automation priority.
-
-### 🧪 Test Prioritization Strategy
-Based on risk scoring:
-
-- **High‑risk features**  
-  - Automated first  
-  - Included in PR checks  
-  - Included in smoke suite  
-  - Must pass before deployment
-
-- **Medium‑risk features**  
-  - Included in daily regression  
-  - Run on every merge to `develop`
-
-- **Low‑risk features**  
-  - Included in nightly or weekly runs  
-  - Automated only if stable and cost‑effective
-
-### 🚦 Execution Layers
-The suite is divided into layers based on risk:
-
-- **Layer 0 — PR Smoke (Fast, Critical)**  
-  Login, auth, API health checks, DB connectivity
-
-- **Layer 1 — Core Regression (High‑Risk)**  
-  Booking flows, payments, user management
-
-- **Layer 2 — Extended Regression (Medium‑Risk)**  
-  Edge cases, negative tests, multi‑step flows
-
-- **Layer 3 — Low‑Risk / Long‑Running**  
-  Rare scenarios, UI‑heavy tests, cross‑browser
-
-### 📊 Risk‑Coverage Dashboard
-The CI pipeline tracks:
-
-- Coverage by risk category  
-- Defects found per risk level  
-- Execution time per layer  
-- Stability trends for high‑risk tests  
-
-This helps leadership understand where automation provides the most value.
-
-### 🎯 Benefits
-- Ensures critical paths are always protected  
-- Reduces execution time without sacrificing quality  
-- Aligns automation with business priorities  
-- Prevents suite bloat and unnecessary tests  
+- Validate backend state after API/UI actions  
+- Validate business rules enforced at DB level  
+- Validate referential integrity  
+- Validate data transformations  
+- Detect silent backend failures  
 
 ---
 
-### 🧩 15. ENVIRONMENT STRATEGY
-| Environment | Purpose | Trigger |
-| :--- | :--- | :--- |
-| **Local** | Script development & debugging | Manual execution |
-| **Dev/QA** | Integration & functional testing | Automatic on Pull Request |
-| **Staging** | Regression & UAT (Pre-release) | Scheduled nightly runs |
-| **Production** | Smoke testing / Sanity check | Post-deployment verification |
+### 🛠 Tools
 
-## 🌍 Environment Parity & Configuration Drift Control
-
-Enterprise systems often suffer from inconsistent environments (QA ≠ Staging ≠ Prod).  
-To ensure reliable and predictable automation results, the framework includes strict environment parity checks.
-
-### 🧩 Configuration Parity Validation
-Before each test run, the framework validates:
-
-- API base URLs and versions
-- Feature flags and toggles
-- Authentication methods (OAuth, JWT, Basic Auth)
-- DB schema versions
-- Third‑party integration endpoints
-- Browser/driver versions (for UI tests)
-
-Any mismatch is logged and surfaced in the CI report.
-
-### 🧪 Schema & Contract Drift Detection
-- API schemas are validated against OpenAPI/Swagger definitions.
-- DB schema drift is detected by comparing expected vs. actual table structures.
-- Contract tests (Pact) ensure provider/consumer compatibility across environments.
-
-### 🔍 Environment Health Checks
-Executed automatically before test execution:
-
-- API heartbeat checks  
-- DB connectivity checks  
-- Mock server availability  
-- Required test data presence  
-- Authentication token generation  
-
-If any check fails, the suite aborts early to avoid false failures.
-
-### 🧱 Immutable Test Environments
-To reduce drift:
-
-- Environment configs are versioned in Git.
-- Infrastructure is provisioned via IaC (Terraform/CloudFormation).
-- No manual changes are allowed in QA/Staging environments.
-
-### 🎯 Benefits
-- Eliminates “works in QA but fails in Staging” issues.
-- Ensures deterministic test behavior across environments.
-- Reduces debugging time caused by configuration mismatches.
-- Improves release confidence and deployment stability.
-
-
-### 🧠 16. BEST PRACTICES
-✅ Maintain atomic, independent test cases
-
-✅ Keep feature files human-readable
-
-✅ Use assertions smartly — 1 major validation per test
-
-✅ Avoid hard-coded values (use properties/config)
-
-✅ Log everything (SLF4J / Log4j)
-
-✅ Keep reports versioned in CI/CD artifacts
-
-
-## 🧹 Code Quality Standards & Governance
-
-To maintain a scalable and maintainable automation codebase, strict quality controls are enforced across all contributions.
-
-### 🧭 Static Code Analysis
-- **Checkstyle** enforces consistent formatting and naming conventions.
-- **PMD** identifies common coding mistakes and anti-patterns.
-- **SpotBugs** detects potential bugs at compile time.
-
-These tools run automatically during every Maven build.
-
-### 🧪 SonarQube Quality Gates
-All pull requests must pass SonarQube checks:
-
-- No new critical or major issues
-- Code coverage on new code ≥ 80%
-- No duplicated code introduced
-- Maintainability and reliability ratings must remain “A”
-
-If a PR fails the quality gate, it cannot be merged.
-
-### 🔍 Pull Request Review Rules
-Every PR must include:
-
-- Clear description of changes
-- Linked Jira ticket or requirement
-- Screenshots or logs for failing tests (if applicable)
-- Reviewer approval from at least one senior engineer
-
-Reviewers validate:
-
-- Test logic correctness
-- Page Object design consistency
-- API schema alignment
-- Proper use of waits, assertions, and utilities
-- No hard-coded values or environment-specific logic
-
-### 🧱 Coding Standards
-- Page Objects follow the Single Responsibility Principle.
-- API clients use reusable request builders.
-- Utilities are centralized and versioned.
-- Test methods remain atomic and independent.
-- No business logic inside step definitions.
-
-### 🎯 Benefits
-- Prevents automation technical debt
-- Ensures long-term maintainability
-- Improves readability and onboarding for new engineers
-- Guarantees consistent engineering quality across contributors
-
-## 🤝 Cross‑Team Collaboration & Automation Governance Model
-
-To ensure consistency, scalability, and long‑term maintainability, the automation framework follows a structured collaboration and governance model across all engineering teams.
-
-### 🧭 Ownership Model
-- **QA Automation Team** owns the framework architecture, utilities, and core modules.
-- **Feature Teams** own their domain‑specific test suites (auth, booking, payments).
-- **DevOps** owns CI/CD integration and environment provisioning.
-- **Developers** contribute unit tests and assist with API schema validation.
-
-Clear ownership prevents bottlenecks and ensures accountability.
-
-### 🧩 Contribution Workflow
-All contributors follow a standardized workflow:
-1. Create a feature branch  
-2. Implement tests following coding standards  
-3. Run local smoke suite  
-4. Submit PR with linked Jira ticket  
-5. Pass SonarQube quality gate  
-6. Receive reviewer approval  
-7. Merge into `develop`  
-
-This ensures consistent quality across teams.
-
-### 📚 Onboarding Playbook
-New engineers receive:
-- Framework architecture overview  
-- Coding standards and naming conventions  
-- Example Page Objects, API clients, and DB utilities  
-- Sample PRs and review guidelines  
-- Access to documentation and Slack channels  
-
-This reduces onboarding time and ensures consistent practices.
-
-### 🗺️ Automation Roadmap Management
-The automation roadmap is reviewed quarterly and includes:
-- New feature coverage  
-- Framework enhancements  
-- Tech debt cleanup  
-- Tool upgrades (Selenium, RestAssured, Java, etc.)  
-- Performance/security/accessibility integration  
-
-Roadmap items are prioritized based on product risk and release timelines.
-
-### 📣 Communication & Change Management
-- All framework changes are announced in a shared Slack/Teams channel.
-- Breaking changes require a migration guide.
-- Monthly sync meetings align QA, Dev, and DevOps teams.
-- Documentation is updated with every major change.
-
-### 🎯 Benefits
-- Ensures consistent automation practices across squads  
-- Reduces onboarding friction for new engineers  
-- Improves collaboration between QA, Dev, and DevOps  
-- Keeps the framework aligned with product and architectural evolution  
+- JDBC  
+- SQL  
+- TestNG  
+- Custom DB utilities  
 
 ---
 
-👨‍💻 Author
+### 📄 Example: Validate User Exists
 
-**Sergei Volodin**
+```java
+@Test
+public void testUserExists() throws SQLException {
+    boolean exists = UserDbValidator.userExists("john@mail.com");
+    assertTrue(exists);
+}
+```
 
-🏙️ Chicago, IL
+---
 
-💼 Senior SDET / QA Automation Engineer
+### 📄 Example: Validate Role
 
-🧪 Passionate about test automation, CI/CD, and quality engineering excellence.
+```java
+@Test
+public void testUserRole() throws SQLException {
+    String role = UserDbValidator.getUserRole(42);
+    assertEquals("admin", role);
+}
+```
+
+---
+
+
+### 📌 Principles
+- No direct DB writes
+
+- Only SELECT queries for validation
+
+- All queries parameterized
+
+- No SQL inside Step Definitions
+
+- DB tests run after API tests
+
+- DB tests must be deterministic
+
+---
+
+### 🔗 5.5 Integration Testing
+
+Integration tests validate how multiple components interact together:
+- API → DB  
+- API → Events  
+- UI → API  
+- API → External Services (WireMock)  
+
+They are narrower than E2E tests but deeper than API tests.
+
+---
+
+### 🎯 Purpose
+
+- Validate cross‑service workflows  
+- Validate data propagation  
+- Validate business rules across layers  
+- Detect integration regressions early  
+- Ensure contract stability  
+
+---
+
+### 🛠 Tools
+
+- RestAssured  
+- JDBC  
+- WireMock  
+- Kafka/SQS clients  
+- TestNG / Cucumber  
+
+---
+
+### 📄 Example: API → DB Integration Test
+
+```java
+@Test
+public void testBookingCreatesDbRecord() throws SQLException {
+    Map<String, Object> payload = BookingPayload.create("John", "Doe");
+
+    Response response = new BookingClient().createBooking(payload);
+    int id = response.jsonPath().getInt("bookingid");
+
+    boolean exists = BookingDbValidator.bookingExists(id);
+    assertTrue(exists);
+}
+```
+
+---
+
+### 📄 Example: API → Event Validation
+
+```java
+@Test
+public void testBookingEventPublished() {
+    int id = 42;
+
+    new BookingClient().triggerEvent(id);
+
+    boolean received = KafkaEventValidator.eventReceived("booking-events", String.valueOf(id));
+    assertTrue(received);
+}
+```
+
+---
+
+### 📄 Example: External Service Virtualization (WireMock)
+
+```java
+WireMock.stubFor(get(urlEqualTo("/rates"))
+        .willReturn(aResponse()
+                .withStatus(200)
+                .withHeader("Content-Type", "application/json")
+                .withBody("{\"rate\": 1.23}")));
+```
+
+---
+
+### 📌 Principles
+- Integration tests run after API tests
+
+- No UI unless required
+
+- External dependencies mocked (WireMock)
+
+- Events validated via consumers
+
+- DB validated only through SELECT
+
+- No business logic in Step Definitions
+
+---
+
+### 🌐 5.6 E2E Testing
+
+E2E tests validate full business workflows across UI, API, DB, and events.  
+They are executed only for the most critical scenarios.
+
+---
+
+### 🎯 Purpose
+
+- Validate real user journeys  
+- Validate cross‑service integration  
+- Validate data flow end‑to‑end  
+- Provide release confidence  
+- Catch issues that appear only when all layers interact  
+
+---
+
+### 🛠 Tools
+
+- Selenium WebDriver  
+- RestAssured  
+- JDBC  
+- Kafka/SQS clients  
+- Cucumber  
+- Allure  
+
+---
+
+### 📄 Example: Full E2E Flow
+
+1. Create user via API  
+2. Login via UI  
+3. Create booking via UI  
+4. Validate booking via API  
+5. Validate DB state  
+6. Validate Kafka/SQS event  
+
+---
+
+### 📄 Example: E2E Step Snippet
+
+```java
+@Then("the booking should exist in all layers")
+public void validateBooking() throws SQLException {
+    assertTrue(apiValidator.bookingExists(id));
+    assertTrue(dbValidator.bookingExists(id));
+    assertTrue(eventValidator.eventPublished(id));
+}
+```
+
+---
+
+### 📌 Principles
+- Only business‑critical flows
+
+- No test data creation via UI
+
+- Validation via API + DB
+
+- Events validated when part of the flow
+
+- E2E tests run last in CI/CD
+
+- Failures must include screenshots + logs + API dumps
+
+---
+
+### 📜 5.7 Contract Testing
+
+Contract testing ensures that communication between services remains stable even when they evolve independently.  
+It is used to verify compatibility between the **consumer** and the **provider**.
+
+---
+
+### 🎯 Purpose
+
+- Prevent breaking changes in APIs  
+- Ensure backward compatibility  
+- Validate request/response structure  
+- Detect schema drift early  
+- Enable independent service deployment  
+
+---
+
+### 🛠 Tools
+
+- Pact (Consumer‑Driven Contracts)  
+- Pact Broker  
+- JSON Schema Validator  
+
+---
+
+### 📄 Example: Consumer Contract (Pact)
+
+```java
+@Pact(consumer = "BookingConsumer")
+public RequestResponsePact createPact(PactDslWithProvider builder) {
+    return builder
+            .given("Booking exists")
+            .uponReceiving("Get booking by ID")
+            .path("/booking/1")
+            .method("GET")
+            .willRespondWith()
+            .status(200)
+            .body(new PactDslJsonBody()
+                    .stringType("firstname")
+                    .stringType("lastname"))
+            .toPact();
+}
+```
+
+---
+
+### 📄 Example: Provider Verification
+
+```java
+@Provider("BookingProvider")
+@PactBroker
+public class BookingProviderTest {
+
+    @TestTemplate
+    @ExtendWith(PactVerificationInvocationContextProvider.class)
+    void verifyPact(PactVerificationContext context) {
+        context.verifyInteraction();
+    }
+}
+```
+
+---
+
+### 📌 Principles
+- Consumers define expectations
+
+- Providers verify expectations
+
+- Contracts stored in Pact Broker
+
+- Contracts versioned per service
+
+- Verification runs on every PR
+
+- No breaking changes without contract update
+
+---
+
+### 🧩 5.8 Service Virtualization
+
+Service virtualization allows the system under test to be isolated from unstable, unavailable, slow, or paid external services.  
+It is used for integration and E2E tests when the real service is unavailable or undesirable.
+
+---
+
+### 🎯 Purpose
+
+- Remove dependency on external services
+
+- Increase test stability
+
+- Speed up execution
+
+- Test negative and edge cases
+
+- Simulate unavailable or paid APIs
+
+---
+
+### 🛠 Tools
+
+- WireMock  
+- MockServer  
+- LocalStack (AWS simulation)  
+- Pact (in combination with contracts)  
+
+---
+
+### 📄 Example: WireMock Stub
+
+```java
+WireMock.stubFor(get(urlEqualTo("/exchange-rate"))
+        .willReturn(aResponse()
+                .withStatus(200)
+                .withHeader("Content-Type", "application/json")
+                .withBody("{\"rate\": 1.23}")));
+```
+
+---
+
+### 🔔 5.9 Event‑Driven Testing
+
+Event‑driven testing validates asynchronous workflows where services communicate through message brokers such as Kafka, SQS, SNS, or RabbitMQ.
+
+---
+
+### 🎯 Purpose
+
+- Validate that events are published correctly  
+- Validate event payload structure and schema  
+- Validate consumer processing logic  
+- Validate end‑to‑end asynchronous flows  
+- Detect silent failures in event pipelines  
+- Ensure compatibility between producers and consumers  
+
+---
+
+### 🛠 Tools
+
+- Kafka client libraries  
+- LocalStack (AWS simulation)  
+- TestNG / JUnit  
+- Custom event consumers  
+- JSON Schema Validator  
+
+---
+
+### 📄 Example: Event Publishing Test
+
+```java
+@Test
+public void testBookingEventPublished() {
+    int id = 42;
+
+    new BookingClient().triggerEvent(id);
+
+    boolean received = KafkaEventValidator.eventReceived(
+            "booking-events",
+            String.valueOf(id)
+    );
+
+    assertTrue(received);
+}
+```
+
+---
+
+### 📄 Example: Event Payload Validation
+
+```java
+@Test
+public void testEventPayload() {
+    String payload = KafkaEventValidator.getLastEvent("booking-events");
+
+    assertThat(payload).contains("\"status\":\"CREATED\"");
+    assertThat(payload).contains("\"bookingId\":");
+}
+```
+
+---
+
+### 📌 Principles
+- Events validated only through consumers
+
+- No direct DB writes in event tests
+
+- Event schemas must be versioned and validated
+
+- Tests must handle asynchronous timing safely
+
+- No sleeps — only polling with timeouts
+
+- Event tests run after API and integration tests
+
+---
+
+### 🔐 5.10 Security Testing
+
+Security testing ensures that the application, APIs, data flows, and infrastructure are protected against vulnerabilities, unauthorized access, and malicious behavior.
+
+---
+
+### 🎯 Purpose
+
+- Identify security vulnerabilities early  
+- Validate authentication and authorization flows  
+- Validate input validation and sanitization  
+- Validate secure data handling and storage  
+- Prevent common attack vectors (OWASP Top 10)  
+- Ensure compliance with organizational and regulatory standards  
+
+---
+
+### 🛠 Tools
+
+- OWASP ZAP  
+- Burp Suite  
+- Postman (for auth flow validation)  
+- RestAssured (security-focused API tests)  
+- Static code analysis tools (SonarQube, Checkmarx)  
+
+---
+
+### 📄 Example: Unauthorized Access Test
+
+```java
+@Test
+public void testUnauthorizedAccess() {
+    Response response = RestAssured
+            .given()
+            .baseUri(Config.getBaseUrl())
+            .get("/admin/secure");
+
+    response.then().statusCode(401);
+}
+```
+
+---
+
+### 📄 Example: SQL Injection Negative Test
+
+```java
+@Test
+public void testSqlInjectionAttempt() {
+    Response response = new UserClient().getUser("1 OR 1=1");
+
+    response.then().statusCode(400);
+}
+```
+
+---
+
+### 📄 Example: XSS Payload Validation
+
+```java
+@Test
+public void testXssPayloadRejected() {
+    String payload = "<script>alert('xss')</script>";
+
+    Response response = new CommentClient().postComment(payload);
+
+    response.then().statusCode(400);
+}
+```
+
+---
+
+### 📌 Principles
+- Security tests run on every PR and nightly
+
+- Authentication and authorization must be validated for all critical endpoints
+
+- Negative tests must cover injection, XSS, CSRF, and broken access control
+
+- Sensitive data must never appear in logs or reports
+
+- Security tests must not rely on UI — API-first approach
+
+- All vulnerabilities must be tracked and remediated before release
+
+---
+
+### ⚡ 5.11 Reliability / Chaos Testing
+
+Reliability and chaos testing validate how the system behaves under unexpected failures, degraded conditions, and infrastructure disruptions.  
+The goal is to ensure the application remains stable, predictable, and recoverable under stress.
+
+---
+
+### 🎯 Purpose
+
+- Validate system resilience under failure  
+- Validate graceful degradation  
+- Validate automatic recovery mechanisms  
+- Identify weak points in distributed systems  
+- Ensure high availability and fault tolerance  
+- Validate retry, timeout, and fallback logic  
+
+---
+
+### 🛠 Tools
+
+- Chaos Monkey / Chaos Mesh  
+- Kubernetes fault injection tools  
+- Load testing tools (k6, JMeter)  
+- Network emulation tools (Toxiproxy)  
+- Observability stack (Grafana, Prometheus, ELK)  
+
+---
+
+### 📄 Example: API Retry Logic Test
+
+```java
+@Test
+public void testApiRetryOnTimeout() {
+    ToxiproxyClient.simulateTimeout("/booking");
+
+    Response response = new BookingClient().getBookingWithRetry(42);
+
+    assertEquals(200, response.statusCode());
+}
+```
+
+---
+
+### 📄 Example: Service Degradation Scenario
+
+```java
+@Test
+public void testServiceDegradation() {
+    ChaosInjector.injectLatency("payment-service", 3000);
+
+    Response response = new OrderClient().createOrder();
+
+    assertEquals("DEGRADED", response.jsonPath().getString("status"));
+}
+```
+
+---
+
+### 📌 Principles
+- Chaos tests must run in isolated environments
+
+- Failures must be controlled, measurable, and reversible
+
+- Observability is mandatory (logs, metrics, traces)
+
+- Chaos tests must validate recovery, not just failure
+
+- No destructive chaos in production without approvals
+
+- Reliability tests must be repeatable and deterministic
+
+---
+
+### 🚀 5.12 Performance & Load Testing
+
+Performance and load testing validate how the system behaves under expected, peak, and extreme workloads.  
+The goal is to ensure stability, responsiveness, and scalability under real‑world traffic patterns.
+
+---
+
+### 🎯 Purpose
+
+- Measure system response times under load  
+- Validate throughput and concurrency limits  
+- Identify performance bottlenecks  
+- Validate system scalability and elasticity  
+- Ensure SLAs and SLOs are met  
+- Detect memory leaks, CPU spikes, and resource exhaustion  
+
+---
+
+### 🛠 Tools
+
+- k6  
+- JMeter  
+- Gatling  
+- Locust  
+- Grafana + Prometheus (metrics)  
+- ELK / OpenSearch (logs)  
+
+---
+
+### 📄 Example: k6 Load Test Script
+
+```javascript
+import http from 'k6/http';
+import { sleep } from 'k6';
+
+export let options = {
+    vus: 50,
+    duration: '30s',
+};
+
+export default function () {
+    http.get('https://api.example.com/booking');
+    sleep(1);
+}
+```
+
+---
+
+### 📄 Example: JMeter Scenario
+- Thread Group: 500 users
+
+- Ramp-up: 60 seconds
+
+- Loop Count: 10
+
+- HTTP Sampler: GET /booking
+
+- Assertions: response time < 500ms
+
+---
+
+### 📌 Metrics to Track
+- Response time (p50, p90, p95, p99)
+
+- Throughput (requests per second)
+
+- Error rate
+
+- CPU, memory, disk I/O
+
+- Network latency
+
+- GC activity
+
+- DB query performance
+
+---
+
+### 📌 Principles
+- Performance tests run in isolated, production-like environments
+
+- Test data must be consistent and controlled
+
+- Load patterns must reflect real user behavior
+
+- Results must be repeatable and statistically valid
+
+- Performance regressions must block release
+
+- Observability is mandatory for root-cause analysis
+
+---
+
+### ♿ 5.13 Accessibility Testing
+
+Accessibility testing ensures that the application is usable by people with disabilities, following WCAG, ADA, and organizational accessibility standards.
+
+---
+
+### 🎯 Purpose
+
+- Validate compliance with WCAG 2.1 AA  
+- Ensure UI is usable with screen readers  
+- Validate keyboard-only navigation  
+- Validate color contrast and visual clarity  
+- Ensure semantic HTML structure  
+- Detect accessibility regressions early  
+
+---
+
+### 🛠 Tools
+
+- Axe Core / Axe DevTools  
+- Lighthouse  
+- WAVE Evaluation Tool  
+- NVDA / JAWS (screen readers)  
+- Keyboard navigation testing utilities  
+
+---
+
+### 📄 Example: Axe Automated Scan
+
+```java
+@Test
+public void testAccessibilityViolations() {
+    AxeBuilder axe = new AxeBuilder();
+    Results results = axe.analyze(driver);
+
+    assertTrue(results.getViolations().isEmpty(), 
+        "Accessibility violations found: " + results.getViolations());
+}
+```
+
+---
+
+### 📄 Example: Keyboard Navigation Checklist
+- All interactive elements reachable via Tab
+
+- Focus indicator visible and consistent
+
+- No keyboard traps
+
+- Escape closes modals
+
+- Enter/Space activate buttons
+
+---
+
+### 📌 Principles
+- Accessibility tests run on every UI change
+
+- Automated scans catch 40–60% of issues
+
+- Manual testing required for full coverage
+
+- Screen reader compatibility must be validated
+
+- Color contrast must meet WCAG AA minimums
+
+- Accessibility defects must block release for public-facing apps
+
+---
+
+### 🧭 5.14 Usability Testing
+
+Usability testing evaluates how easily real users can interact with the application, complete tasks, and understand the interface.  
+The goal is to ensure the product is intuitive, efficient, and aligned with user expectations.
+
+---
+
+### 🎯 Purpose
+
+- Validate ease of use and task completion  
+- Identify confusing or inefficient UI patterns  
+- Measure user satisfaction and perceived complexity  
+- Validate navigation flow and information architecture  
+- Detect usability regressions early  
+- Ensure the product supports real user behavior  
+
+---
+
+### 🛠 Tools
+
+- UserTesting.com  
+- Lookback  
+- Hotjar (session recordings, heatmaps)  
+- Figma prototypes (for early testing)  
+- Surveys and feedback forms  
+
+---
+
+### 📄 Example: Usability Test Scenario
+
+- User attempts to create a booking  
+- User navigates through the dashboard  
+- User edits profile information  
+- User searches for an item  
+- User completes a checkout flow  
+
+Each step is evaluated for clarity, speed, and error rate.
+
+---
+
+### 📄 Example: Usability Metrics
+
+- Time to complete task  
+- Number of clicks  
+- Error rate  
+- User satisfaction score (SUS)  
+- Drop‑off rate  
+- Heatmap interaction patterns  
+
+---
+
+### 📌 Principles
+
+- Usability tests must involve real users or representative personas  
+- Tests should be task‑based and goal‑oriented  
+- Observers must not guide or influence the user  
+- Findings must be documented with actionable recommendations  
+- Usability issues must be prioritized based on impact  
+- Usability testing should occur early and continuously
+
+---
+
+### 🏛️ 5.15 Compliance & Regulatory Testing
+
+Compliance and regulatory testing ensures that the system adheres to legal, industry, and organizational standards.  
+These tests are mandatory for regulated domains such as healthcare, finance, insurance, automotive, and government.
+
+---
+
+### 🎯 Purpose
+
+- Validate compliance with regulatory frameworks  
+- Ensure correct handling of sensitive data  
+- Validate auditability and traceability  
+- Ensure adherence to industry standards (HIPAA, GDPR, PCI‑DSS, SOX, ISO)  
+- Prevent legal, financial, and operational risks  
+- Ensure documentation and processes meet compliance requirements  
+
+---
+
+### 🛠 Frameworks & Standards
+
+- **HIPAA** — healthcare data protection  
+- **GDPR** — personal data privacy (EU)  
+- **PCI‑DSS** — payment card security  
+- **SOX** — financial reporting controls  
+- **ISO 27001** — information security management  
+- **NIST** — cybersecurity standards  
+- **FDA / GxP** — regulated medical and pharmaceutical systems  
+
+---
+
+### 🛠 Tools
+
+- Compliance checklists  
+- Audit log validators  
+- Data masking and anonymization tools  
+- Static analysis tools (PII detection)  
+- Encryption validation utilities  
+
+---
+
+### 📄 Example: PII Masking Validation
+
+```java
+@Test
+public void testPiiIsMaskedInLogs() {
+    String logs = LogReader.readLatest();
+
+    assertFalse(logs.contains("john.doe@example.com"));
+    assertFalse(logs.contains("4111 1111 1111 1111"));
+}
+```
+
+---
+
+### 📄 Example: Encryption Enforcement Test
+
+```java
+@Test
+public void testSensitiveDataEncrypted() {
+    boolean encrypted = EncryptionValidator.isEncrypted(
+            DatabaseReader.getField("users", "ssn", 42)
+    );
+
+    assertTrue(encrypted);
+}
+```
+
+---
+
+### 📌 Principles
+- Compliance tests must be traceable and auditable
+
+- Sensitive data must never appear in logs, reports, or test artifacts
+
+- Encryption and access control must be validated regularly
+
+- Compliance tests must run in controlled environments
+
+- Documentation must be complete, versioned, and reviewable
+
+- Compliance failures must block release in regulated domains
+
+---
+
+### 🌍 5.16 Internationalization (i18n) & Localization (l10n) Testing
+
+Internationalization and localization testing ensure that the application works correctly across different languages, regions, formats, and cultural contexts.
+
+---
+
+### 🎯 Purpose
+
+- Validate correct language translations  
+- Validate date, time, number, and currency formats  
+- Validate UI layout for text expansion  
+- Ensure no hard‑coded strings  
+- Validate locale‑specific business rules  
+- Ensure consistent behavior across regions  
+
+---
+
+### 🛠 Tools
+
+- i18n JSON/YAML resource files  
+- Pseudo‑localization tools  
+- Browser locale overrides  
+- Automated UI scanners for missing translations  
+- Snapshot comparison tools  
+
+---
+
+### 📄 Example: Locale‑Specific Date Format Test
+
+```java
+@Test
+public void testDateFormatForGermanLocale() {
+    Response response = new BookingClient()
+            .withLocale("de-DE")
+            .getBooking(42);
+
+    String date = response.jsonPath().getString("createdAt");
+    assertTrue(date.matches("\\d{2}\\.\\d{2}\\.\\d{4}"));
+}
+```
+
+---
+
+### 📄 Example: Missing Translation Detection
+
+```java
+@Test
+public void testMissingTranslations() {
+    List<String> missing = TranslationValidator.findMissingKeys("en-US", "fr-FR");
+    assertTrue(missing.isEmpty(), "Missing translation keys: " + missing);
+}
+```
+
+---
+
+### 📌 Principles
+- No hard‑coded UI text
+
+- All strings must come from locale files
+
+- Pseudo‑localization must be part of CI
+
+- UI must support text expansion (30–50%)
+
+- Locale‑specific formatting must be validated
+
+- All supported languages must be tested before release
+
+---
+
+### 📱 5.17 Mobile Testing
+
+Mobile testing validates the functionality, performance, and usability of mobile applications across different devices, OS versions, screen sizes, and network conditions.
+
+---
+
+### 🎯 Purpose
+
+- Validate core mobile user flows  
+- Ensure consistent behavior across iOS and Android  
+- Validate UI responsiveness on different screen sizes  
+- Validate app behavior under varying network conditions  
+- Validate integration with device features (camera, GPS, notifications)  
+- Detect platform‑specific regressions early  
+
+---
+
+### 🛠 Tools
+
+- Appium  
+- BrowserStack / Sauce Labs (real device cloud)  
+- XCUITest (iOS)  
+- Espresso (Android)  
+- Detox (React Native)  
+- Charles Proxy (network inspection)  
+
+---
+
+### 📄 Example: Appium Login Test
+
+```java
+@Test
+public void testLogin() {
+    MobileElement username = driver.findElement(By.id("username"));
+    MobileElement password = driver.findElement(By.id("password"));
+    MobileElement loginBtn = driver.findElement(By.id("login"));
+
+    username.sendKeys("john");
+    password.sendKeys("pass123");
+    loginBtn.click();
+
+    MobileElement dashboard = driver.findElement(By.id("dashboard"));
+    assertTrue(dashboard.isDisplayed());
+}
+```
+
+---
+
+### 📄 Example: Network Condition Simulation
+
+```java
+driver.setNetworkConnection(new NetworkConnectionSetting(
+        true,  // airplane mode
+        false, // wifi
+        false  // data
+));
+```
+
+---
+
+### 📌 Principles
+- Tests must run on real devices, not only emulators
+
+- Device matrix must reflect real user distribution
+
+- UI tests must avoid brittle selectors
+
+- Network throttling must be part of CI
+
+- Mobile tests must validate both portrait and landscape modes
+
+- Screenshots and device logs required for failures
+
+---
+
+### 🧪 5.18 API Mocking & Test Data Simulation
+
+API mocking and test data simulation allow teams to test API‑dependent functionality without relying on real backend services, unstable environments, or incomplete integrations.
+
+---
+
+### 🎯 Purpose
+
+- Enable testing when backend services are unavailable  
+- Stabilize tests by removing external dependencies  
+- Simulate edge cases and negative scenarios  
+- Speed up test execution  
+- Provide deterministic and reproducible responses  
+- Support parallel testing without data collisions  
+
+---
+
+### 🛠 Tools
+
+- WireMock  
+- MockServer  
+- Postman Mock Servers  
+- LocalStack (AWS service simulation)  
+- JSON Server (lightweight REST mocks)  
+- Custom in‑memory simulators  
+
+---
+
+### 📄 Example: WireMock Static Stub
+
+```java
+WireMock.stubFor(get(urlEqualTo("/users/42"))
+        .willReturn(aResponse()
+                .withStatus(200)
+                .withHeader("Content-Type", "application/json")
+                .withBody("{\"id\":42,\"name\":\"John Doe\"}")));
+```
+
+---
+
+### 📄 Example: Dynamic Mock Response
+
+```java
+WireMock.stubFor(post(urlEqualTo("/orders"))
+        .willReturn(aResponse()
+                .withStatus(201)
+                .withBody("{\"orderId\": ${json-unit.any-number}}")));
+```
+
+---
+
+### 📄 Example: LocalStack S3 Simulation
+
+```java
+AmazonS3 s3 = LocalStackClientBuilder
+        .standard()
+        .withEndpointConfiguration(localstack.getEndpointConfiguration(S3))
+        .build();
+
+s3.putObject("test-bucket", "file.txt", "content");
+```
+
+---
+
+### 📌 Principles
+- Mocks must be versioned and aligned with API contracts
+
+- Mock data must be realistic and consistent
+
+- Negative and edge cases must be explicitly simulated
+
+- Mocks must not drift from real API behavior
+
+- Mocking is for integration and component tests, not E2E
+
+- Test data simulation must avoid shared global state
+
+---
+
+### 📡 5.19 Observability Testing (Logs, Metrics, Traces)
+
+Observability testing ensures that the system provides complete, accurate, and actionable visibility into its internal state through logs, metrics, and distributed traces.  
+The goal is to detect issues early, support debugging, and validate that monitoring is reliable and meaningful.
+
+---
+
+### 🎯 Purpose
+
+- Validate that logs contain required information  
+- Validate that metrics are emitted correctly and consistently  
+- Validate distributed tracing across services  
+- Ensure correlation IDs propagate through the entire request flow  
+- Detect missing, noisy, or misleading observability signals  
+- Ensure the system is diagnosable under failure conditions  
+
+---
+
+### 🛠 Tools
+
+- ELK / OpenSearch (logs)  
+- Grafana + Prometheus (metrics)  
+- Jaeger / Zipkin / OpenTelemetry (traces)  
+- Kibana dashboards  
+- Log and metric validators in tests  
+
+---
+
+### 📄 Example: Log Validation Test
+
+```java
+@Test
+public void testLogContainsCorrelationId() {
+    String correlationId = UUID.randomUUID().toString();
+
+    new BookingClient()
+            .withCorrelationId(correlationId)
+            .createBooking();
+
+    String logs = LogReader.readLatest();
+
+    assertTrue(logs.contains(correlationId));
+}
+```
+
+---
+
+### 📄 Example: Metrics Emission Test
+
+```java
+@Test
+public void testMetricsEmitted() {
+    MetricsClient.triggerAction("booking_created");
+
+    double count = MetricsClient.getCounterValue("booking_created_total");
+
+    assertTrue(count > 0);
+}
+```
+
+---
+
+### 📄 Example: Trace Propagation Test
+
+```java
+@Test
+public void testTracePropagation() {
+    TraceResult trace = TraceInspector.captureTrace(() ->
+            new BookingClient().createBooking()
+    );
+
+    assertTrue(trace.containsSpan("api-gateway"));
+    assertTrue(trace.containsSpan("booking-service"));
+    assertTrue(trace.containsSpan("db-write"));
+}
+```
+
+---
+
+### 📌 Principles
+- Logs must include correlation IDs, timestamps, and severity levels
+
+- Metrics must follow naming conventions and be tagged consistently
+
+- Traces must cover all major service boundaries
+
+- Observability must be validated for both success and failure paths
+
+- No sensitive data in logs, metrics, or traces
+
+- Observability failures must block release for critical services
+
+---
+
+### 🗂️ 5.20 Test Data Management (TDM)
+
+Test Data Management ensures that all tests have access to consistent, reliable, secure, and reproducible data across environments.  
+The goal is to eliminate flaky tests, reduce data collisions, and ensure deterministic test outcomes.
+
+---
+
+### 🎯 Purpose
+
+- Provide stable and predictable test data  
+- Avoid data collisions in parallel execution  
+- Ensure data consistency across environments  
+- Support both synthetic and production‑like datasets  
+- Enable fast test setup and teardown  
+- Enforce data privacy and masking rules  
+
+---
+
+### 🛠 Approaches
+
+- Synthetic data generation  
+- Data seeding via APIs  
+- Database snapshots and resets  
+- On‑demand data provisioning  
+- Data masking and anonymization  
+- Contract‑based data templates  
+
+---
+
+### 🛠 Tools
+
+- Custom TDM services  
+- DB seeders and migration tools  
+- LocalStack (for cloud data simulation)  
+- Faker libraries (Java, JS, Python)  
+- Data masking utilities  
+- Test containers for isolated DB instances  
+
+---
+
+### 📄 Example: Synthetic Data Generator
+
+```java
+public class UserDataFactory {
+
+    public static Map<String, Object> createUser() {
+        return Map.of(
+                "firstname", Faker.instance().name().firstName(),
+                "lastname", Faker.instance().name().lastName(),
+                "email", Faker.instance().internet().emailAddress(),
+                "password", "Pass123!"
+        );
+    }
+}
+```
+
+---
+
+### 📄 Example: API‑Based Data Seeding
+
+```java
+@Test
+public void seedUser() {
+    Map<String, Object> user = UserDataFactory.createUser();
+    Response response = new UserClient().createUser(user);
+
+    assertEquals(201, response.statusCode());
+}
+```
+
+---
+
+### 📄 Example: Database Reset (Test Containers)
+
+```java
+@Container
+static PostgreSQLContainer<?> db = new PostgreSQLContainer<>("postgres:15")
+        .withInitScript("schema.sql");
+```
+
+---
+
+### 📌 Principles
+- Test data must be isolated per test
+
+- No shared global state
+
+- Data must be created via APIs, not DB writes
+
+- Sensitive data must be masked or anonymized
+
+- TDM must support parallel execution
+
+- Data cleanup must be automatic and reliable
+
+---
+
+### 🏗️ 5.21 Environment & Configuration Testing
+
+Environment and configuration testing ensures that all environments (dev, QA, staging, production) are correctly configured, consistent, and aligned with expected infrastructure and application settings.
+
+---
+
+### 🎯 Purpose
+
+- Validate environment consistency across all stages  
+- Ensure configuration values are correct and secure  
+- Detect misconfigurations before deployment  
+- Validate feature flags and environment‑specific toggles  
+- Ensure infrastructure dependencies are available and healthy  
+- Prevent environment‑related test failures  
+
+---
+
+### 🛠 Tools
+
+- Configuration validators  
+- Environment health check APIs  
+- Kubernetes probes (liveness/readiness)  
+- Terraform / Helm validation tools  
+- Secrets management systems (Vault, AWS Secrets Manager)  
+
+---
+
+### 📄 Example: Environment Health Check Test
+
+```java
+@Test
+public void testEnvironmentHealth() {
+    Response response = HealthClient.check();
+
+    assertEquals(200, response.statusCode());
+    assertEquals("UP", response.jsonPath().getString("status"));
+}
+```
+
+---
+
+### 📄 Example: Feature Flag Validation
+
+```java
+@Test
+public void testFeatureFlagEnabled() {
+    boolean enabled = FeatureFlagClient.isEnabled("new-booking-flow");
+    assertTrue(enabled);
+}
+```
+
+---
+
+### 📄 Example: Configuration Consistency Check
+
+```java
+@Test
+public void testConfigValue() {
+    String value = ConfigReader.get("booking.timeout.ms");
+    assertEquals("5000", value);
+}
+```
+
+---
+
+### 📌 Principles
+- All environments must be versioned and reproducible
+
+- No hard‑coded configuration values in tests
+
+- Secrets must never appear in logs or reports
+
+- Feature flags must be validated per environment
+
+- Environment drift must be detected automatically
+
+- Configuration tests must run before functional tests
+
+---
+
+### 💾 5.22 Backup & Disaster Recovery Testing
+
+Backup and Disaster Recovery (DR) testing ensures that the system can recover from data loss, infrastructure failures, and catastrophic events with minimal downtime and no data corruption.
+
+---
+
+### 🎯 Purpose
+
+- Validate backup creation and restoration  
+- Ensure data integrity after restore  
+- Validate Recovery Time Objective (RTO)  
+- Validate Recovery Point Objective (RPO)  
+- Ensure business continuity during failures  
+- Detect gaps in backup coverage and retention policies  
+
+---
+
+### 🛠 Tools
+
+- Cloud provider backup services (AWS Backup, Azure Backup, GCP Backup)  
+- Database snapshot tools  
+- File system backup utilities  
+- Disaster recovery orchestration tools  
+- Infrastructure-as-code for environment recreation  
+
+---
+
+### 📄 Example: Database Restore Test
+
+```java
+@Test
+public void testDatabaseRestore() {
+    BackupManager.triggerBackup("users-db");
+
+    BackupManager.restoreLatest("users-db");
+
+    boolean valid = DbIntegrityChecker.validate("users-db");
+    assertTrue(valid);
+}
+```
+
+---
+
+### 📄 Example: RTO Validation
+
+```java
+@Test
+public void testRtoWithinLimit() {
+    long start = System.currentTimeMillis();
+
+    DisasterRecovery.triggerFailover("booking-service");
+
+    long duration = System.currentTimeMillis() - start;
+
+    assertTrue(duration < 300000); // 5 minutes
+}
+```
+
+---
+
+### 📄 Example: RPO Validation
+
+```java
+@Test
+public void testRpoWithinLimit() {
+    long lastBackup = BackupManager.getLastBackupTimestamp("orders-db");
+    long now = System.currentTimeMillis();
+
+    long diff = now - lastBackup;
+
+    assertTrue(diff < 600000); // 10 minutes
+}
+```
+
+---
+
+### 📌 Principles
+- Backups must be automated, versioned, and encrypted
+
+- DR tests must run regularly (monthly/quarterly)
+
+- Restore tests must validate data integrity, not just completion
+
+- RTO and RPO must be measurable and enforced
+
+- DR environments must mirror production configuration
+
+- Backup failures must block release for critical systems
+
+---
+
+### 🛡️ 5.23 Penetration Testing (Advanced Security)
+
+Penetration testing evaluates the system’s resistance to real‑world attacks by simulating malicious behavior.  
+It goes beyond standard security testing and focuses on exploiting vulnerabilities to assess actual risk.
+
+---
+
+### 🎯 Purpose
+
+- Identify exploitable vulnerabilities  
+- Validate effectiveness of security controls  
+- Assess real‑world attack surface  
+- Validate privilege escalation protections  
+- Test resilience against OWASP Top 10 and beyond  
+- Provide actionable remediation guidance  
+
+---
+
+### 🛠 Tools
+
+- Burp Suite Pro  
+- OWASP ZAP (advanced mode)  
+- Metasploit  
+- Nmap  
+- Nikto  
+- Custom exploit scripts  
+- Cloud security scanners (AWS Inspector, Azure Defender)  
+
+---
+
+### 📄 Example: SQL Injection Attempt (Manual Payload)
+
+```java
+@Test
+public void testSqlInjectionExploit() {
+    Response response = RestAssured
+            .given()
+            .queryParam("id", "1 OR 1=1 --")
+            .get("/users");
+
+    assertEquals(400, response.statusCode());
+}
+```
+
+---
+
+### 📄 Example: Port Scan Validation (Nmap)
+
+```Code
+nmap -sV -p 1-65535 api.example.com
+```
+
+Expected:
+- Only approved ports open
+
+- No unexpected services exposed
+
+---
+
+### 📄 Example: Authentication Bypass Attempt
+
+```java
+@Test
+public void testAuthBypass() {
+    Response response = RestAssured
+            .given()
+            .header("X-Forwarded-User", "admin")
+            .get("/admin/panel");
+
+    assertEquals(401, response.statusCode());
+}
+```
+
+---
+
+### 📌 Principles
+- Pen tests must be performed by certified professionals
+
+- Tests must be scoped, approved, and monitored
+
+- No testing in production without explicit authorization
+
+- Findings must be risk‑rated and tracked to closure
+
+- Retesting required after remediation
+
+- Penetration testing is mandatory for regulated industries
+
+---
+
+### 🤖 5.24 AI/ML Model Testing
+
+AI/ML model testing ensures that machine learning systems behave reliably, fairly, and consistently across different datasets, environments, and real‑world scenarios.  
+The goal is to validate model quality, stability, and safety before deployment.
+
+---
+
+### 🎯 Purpose
+
+- Validate model accuracy, precision, recall, and F1 score  
+- Detect data drift and concept drift  
+- Validate fairness and bias metrics  
+- Ensure reproducibility of model predictions  
+- Validate model performance under different input distributions  
+- Ensure safe and explainable model behavior  
+
+---
+
+### 🛠 Tools
+
+- TensorFlow Model Analysis (TFMA)  
+- MLflow  
+- scikit‑learn metrics  
+- SHAP / LIME (explainability)  
+- Great Expectations (data validation)  
+- Evidently AI (drift detection)  
+
+---
+
+### 📄 Example: Model Accuracy Test
+
+```python
+def test_model_accuracy(model, test_data, test_labels):
+    predictions = model.predict(test_data)
+    score = accuracy_score(test_labels, predictions)
+
+    assert score >= 0.90
+```
+
+---
+
+### 📄 Example: Data Drift Detection
+
+```python
+from evidently.test_suite import TestSuite
+from evidently.tests import TestDataDrift
+
+suite = TestSuite(tests=[TestDataDrift()])
+result = suite.run(reference_data, current_data)
+
+assert result.as_dict()["summary"]["all_passed"]
+```
+
+---
+
+### 📄 Example: Bias/Fairness Test
+
+```python
+def test_fairness(model, data, labels, sensitive_attribute):
+    metrics = fairness_metrics(model, data, labels, sensitive_attribute)
+    assert metrics["disparate_impact"] >= 0.8
+```
+
+---
+
+### 📌 Principles
+- Models must be tested on multiple datasets (train, validation, test, live samples)
+
+- All metrics must be versioned and tracked
+
+- Explainability must be validated for critical decisions
+
+- Drift detection must run continuously in production
+
+- Bias and fairness must be evaluated for all sensitive attributes
+
+- ML tests must be deterministic and reproducible
+
+---
+
+### 🧱 5.25 Summary of Testing Layers
+
+This section summarizes all testing layers used in the system, from the lowest‑level unit tests to the highest‑level end‑to‑end and non‑functional tests.  
+Each layer has a specific purpose, scope, and tooling strategy, ensuring full coverage across functionality, reliability, security, and compliance.
+
+---
+
+### 🗂️ Layer Overview
+
+| Layer | Scope | Purpose |
+|------|--------|----------|
+| **Unit Testing** | Individual functions/classes | Validate logic correctness at the smallest level |
+| **API Testing** | REST/GraphQL endpoints | Validate business logic and service behavior |
+| **UI Testing** | Web/mobile interfaces | Validate critical user flows and interactions |
+| **DB Testing** | Database state | Validate data integrity and consistency |
+| **Integration Testing** | Multi‑service interactions | Validate cross‑component workflows |
+| **E2E Testing** | Full business flows | Validate real user journeys across all layers |
+| **Contract Testing** | Consumer ↔ Provider APIs | Prevent breaking changes and schema drift |
+| **Service Virtualization** | External dependencies | Stabilize tests and simulate unavailable services |
+| **Event‑Driven Testing** | Kafka/SQS/SNS events | Validate asynchronous workflows |
+| **Security Testing** | Auth, input validation | Prevent vulnerabilities and unauthorized access |
+| **Penetration Testing** | Advanced exploitation | Validate real‑world attack resistance |
+| **Performance & Load Testing** | System under stress | Validate scalability and throughput |
+| **Reliability / Chaos Testing** | Failure scenarios | Validate resilience and recovery |
+| **Accessibility Testing** | WCAG compliance | Ensure usability for all users |
+| **Usability Testing** | User experience | Validate clarity, efficiency, and satisfaction |
+| **Compliance Testing** | Regulatory standards | Ensure legal and industry compliance |
+| **i18n/l10n Testing** | Localization | Validate global readiness |
+| **Mobile Testing** | iOS/Android apps | Validate mobile‑specific flows |
+| **API Mocking & Simulation** | Mocked services | Enable deterministic and isolated testing |
+| **Observability Testing** | Logs, metrics, traces | Validate system diagnosability |
+| **Test Data Management** | Data lifecycle | Ensure stable, isolated, reproducible test data |
+| **Environment & Config Testing** | Infrastructure | Validate environment consistency |
+| **Backup & DR Testing** | Recovery | Validate RTO/RPO and data restoration |
+| **AI/ML Model Testing** | ML systems | Validate accuracy, fairness, drift, and safety |
+
+---
+
+### 🎯 Key Principles Across All Layers
+
+- Lower layers (unit, API) provide fast feedback and high stability  
+- Higher layers (E2E, performance) validate real‑world behavior  
+- Non‑functional layers (security, compliance, chaos) ensure robustness  
+- Tests must be deterministic, isolated, and reproducible  
+- Observability and TDM support all layers  
+- CI/CD must orchestrate layers in the correct order  
+- Failures must produce actionable diagnostics  
+
+---
+
+### 🧩 Layer Execution Order in CI/CD
+
+1. **Static Analysis & Linting**  
+2. **Unit Tests**  
+3. **Contract Tests**  
+4. **API Tests**  
+5. **Integration Tests**  
+6. **DB Tests**  
+7. **Event‑Driven Tests**  
+8. **UI Tests**  
+9. **E2E Tests**  
+10. **Performance Tests**  
+11. **Security & Penetration Tests**  
+12. **Compliance Tests**  
+13. **Chaos & Reliability Tests**  
+14. **DR/Backup Tests** (scheduled, not per‑PR)
+
+---
+
+### 📌 Final Notes
+
+This layered approach ensures:
+
+- Maximum coverage  
+- Minimum flakiness  
+- Fast feedback loops  
+- High confidence in releases  
+- Full alignment with enterprise QA standards  
+
+---
+
